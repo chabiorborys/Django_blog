@@ -4,4 +4,5 @@ from django.views import View
 
 class LandingPageView(View):
     def get(self, request):
-        return render(request, 'github.html'{})
+        context = {}
+        return render(request, 'index.html', context)
