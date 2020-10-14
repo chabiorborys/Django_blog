@@ -1,0 +1,58 @@
+<html>
+        <head>
+                <title>Secure Shell</title>
+        </head>
+
+        <body>
+            <h1>Getting to know Secure Shell(SSH)</h1>
+            <h2>What is SSH?</h2>
+            <p>SSH, or secure shell, is an encrypted protocol used to administer and communicate</p>>
+            <h2> How does SSH keys work?</h2>
+            <p>An SSH server can authenticate clients using a variety of different methods. The </p>>
+            <p>Although passwords are sent to the server in a secure manner, they are generally </p>>
+            <p>SSH keys prove to be a reliable and secure alternative.</p>
+            <h3>Nice, but what are those keys, you may ask.</h3>
+            <p>Well, SSH key pairs are two cryptographically secure keys that can be used to aut>
+            <p>The PRIVATE KEY is retained by the client and should be kept absolutely secret. A>
+            <p>The PUBLIC KEY is uploaded to a remote server that you want to be able to log int>
+            <p>When a client attempts to authenticate using SSH keys, the server can test the cl>
+            <h3>Ok, where do I start?</h3>
+            <p>The first step to configure SSH key authentication to your server is to generate >
+            <p>Write in terminal: ssh-keygen </p>
+            <p>You will get:</p>
+            <p>Generating public/private rsa key pair.
+            Enter file in which to save the key (/home/username/.ssh/id_rsa):</p>
+            <h4>If you had previously generated an SSH key pair, you may see a prompt that looks>
+            <p>/home/username/.ssh/id_rsa already exists.
+            Overwrite (y/n)?</p>
+            <p>If you choose to overwrite the key on disk, you will not be able to authenticate >
+            <h4>If everything goes according to plan, you shoud get something like this:</h4>
+            <p>Created directory '/home/username/.ssh'.
+        Enter passphrase (empty for no passphrase):
+        Enter same passphrase again: </p>
+            <p>A passphrase is an optional addition. If you enter one, you will have to provide >
+            <h3> Bingo! Now you have a public and private key that you can use to authenticate. >
+            <h4> P.S: That's how you know that you did a fine job: </h4>
+            <p>Your identification has been saved in /home/username/.ssh/id_rsa.
+        Your public key has been saved in /home/username/.ssh/id_rsa.pub.
+        The key fingerprint is:
+        a9:49:2e:2a:5e:33:3e:a9:de:4e:77:11:58:b6:90:26 username@remote_host
+        The key's randomart image is:
+        <pre>
+            <code>
+                    +--[ RSA 2048]----+
+                    |     ..o         |
+                    |   E o= .        |
+                    |    o. o         |
+                    |        ..       |
+                    |      ..S        |
+                    |     o o.        |
+                    |   =o.+.         |
+                    |. =++..          |
+                    |o=++.            |
+                    +-----------------+</p>
+            </code>
+        </pre>
+            <p> Just checking something </p>
+        </body>
+</html>
