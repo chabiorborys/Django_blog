@@ -1,44 +1,9 @@
-<html>
-    <head>
-            <style>
-                    /* Add a black background color to the top navigation */
-.topnav {
-background-color: #333;
-overflow: hidden;
-}
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<p></p>
 
-/* Style the links inside the navigation bar */
-.topnav a {
-float: left;
-color: #f2f2f2;
-text-align: center;
-padding: 14px 16px;
-text-decoration: none;
-font-size: 17px;
-}
-
-/* Change the color of links on hover */
-.topnav a:hover {
-background-color: #ddd;
-color: black;
-}
-
-/* Add a color to the active/current link */
-.topnav a.active {
-background-color: #4CAF50;
-color: white;
-}
-            </style>
-    </head>
-    <body>
-        <div class="topnav">
-            <a class="active" href="/">Home</a>
-            <a href="/tech">Blog</a>
-            <a href="/about">About</a>
-            <a href="/contact">Contact</a>  
-        </div>   
-        <p> Hi! My name is Borys and I am a novice programmer. I started my journey at the beginning of 2020 with Python Developer course. Since then I am trying to expend my knowledge. I find it frustrating, hard and totally awesome.</p>
-        <h3>If you are looking for a Python programmer you found him! Don't regret your decision, contact ME! </h3>
-        <p>Cheers</p>
-    </body>
-</html>
+        <p> Hi! My name is Borys and I am a beginner programmer. I started my journey at the beginning of 2020 with Python Developer course. Since then I am trying to expend my knowledge. I find it frustrating, hard and totally awesome.</p>
+        <p>If you are looking for a Python programmer you found him! Don't regret your decision, contact ME! </p>
+        <p>Cheers!</p>
+{% endblock content %}

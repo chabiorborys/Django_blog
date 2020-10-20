@@ -18,6 +18,8 @@ urlpatterns = [
     path('docker/', views.DockerPageView.as_view()),
     path('vim/', views.VimPageView.as_view()),
     path('creating_scripts/', views.CreatingScriptsPageView.as_view()),
+    path('github_vol1/', views.GithubVol1PageView.as_view()),
+    path('usefull_terms/', views.UsefullTermsPageView.as_view()),
 ]
 
 

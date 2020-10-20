@@ -1,13 +1,16 @@
-<html>
-        <head>
-                <title>Django</title>
-        </head>
-        <body>
-                <h1>Getting to know Django</h1>
-        </body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 
-
-
-
-
+<h1>Getting to know Django</h1>
+<h2>What is Django?</h2>
+<p>Django is a Python Web framework that does alot of work for you when creating your web applications. They use a nice sentence to describe their goal and it goas like this - You can focus on writing your app without needing to reinvent the wheel.</p>
+<p>Django provides couple of layers that help you organise your work:</p>
+<ul>
+    <li>The model layer - For structuring and manipulating the data of your Web application.</li>
+    <li>The view layer - Takes care of the logic responsible for processing a user's request and for returning the response.</li>
+    <li>The template layer - Provides a designer-friendly syntax for rendering the information to be presented to the user.</li>
+    <li>Forms - Framework to facilitate the creation of form and the manipulation of form data.</li>
+</ul>
+<p>On top of this, there are lots of settings and extra manipulations that you can do, whilst working on your project.</p>
+{% endblock content %}

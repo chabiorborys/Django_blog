@@ -1,20 +1,29 @@
-<html>
-        <head>
-                <title>Creating bash scripts</title>
-        </head>
-        <body>
-                <h4>How to create a script that will automatically run when called?</h4>
-                <h2> Each time you want to pull changes from your git repository to your remote serv>
-                <li> Log to your server - ssh user@server.ip </li>
-                <li> Get to the specific file where your work is being kept - cd /var/www </li>
-                <li> Pull the work from git repo - git pull </li>
-                <li> Hope that it all worked </li>
-                <h2> However, you can make your life easier by creeating a script that will do all t>
-                <li> Get to the folder where you keep your project </li>
-                <li> Create a file that will have a name of your command - vim remote_gitpull.sh</li>
-                <li> Type your shell script. That's where you want to type exactly the same routine >
-                <li> Save changes </li>
-                <p> Now you can pull changes from git repo by calling your script. Remamber that you>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 
-        </body>
-</html>
+<h4>How to create a script that will automatically run when called? Let's do it on an example</h4>
+<h2> Each time you want to pull changes from your git repository to your remote server, you need to do the same routine.
+</h2>
+<li> Log to your server:
+        <pre><code>ssh user@server.ip </code></pre>
+</li>
+<li> Get to the specific file where your work is being kept</li>
+<li> Pull the work from git repository:
+        <pre><code> git pull </code></pre>
+</li>
+<li> Hope that it all worked </li>
+<h2> However, you can make your life easier by creeating a script that will do all those things for you, each time you
+        run it. Ok, easy peazy, but how should I do it? Let me tell you...</h2>
+<li> Get to the folder where you keep your project </li>
+<li> Create a file that will have a name of your command:
+        <pre><code>vim remote_gitpull.sh</code></pre>
+</li>
+<li> Type your shell script. That's where you want to type exactly the same routine you would do:
+        <pre><code>ssh user@server.ip
+        "cd /var/www/html/blog; git pull origin master"</code></pre>
+</li>
+<li> Save changes </li>
+<p> Now you can pull changes from git repo by calling your script. Remamber that you need to be in a folder where you've
+        created it. That's why it's a good idea to keep it in your project:<pre><code>./remote_gitpull.sh</code></pre> </p>
+{% endblock content %}

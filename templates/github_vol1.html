@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+		<h1> How to push newly created project to your Github account? </h1>
+		<p> 1) Decide where you want to keep your files and get there.</p>
+		<p> 2) Check if git is already initialized: <pre><code> git status </code></pre></p>
+		<p> If it is not being tracked by git, you must initialize it: <pre><code> git init </code></pre></p>
+		<p> 3) Create new repository on your Githb account. If you already have prepared a repository, skip this point.</p>
+		<p> 4) Connect your project with your empty Github repository:</p>
+		<p> Copy the link of your repo on Github:</p>
+		<img src="{% static 'github_clone_link.png' %}" style="width: 400px;height: 200px;">
+		<p>Go back to your project in the terminal and type: <pre><code> git remote add origin [copied link of your Github repository]</code></pre> </p>
+		<p>Push your branch to Github <pre><code> git push origin master</code></pre></p>
+		<p>Voila! You should see your project files in Github repository!</p>
+		<h1>Adding an existing project to Github</h1>
+		<p> 1) Get to the folder where you keep your project</p>
+		<p> 2) Check if git is already initialized: <pre><code> git status </code></pre></p>
+		<p> If it is not being tracked by git, you must initialize it: <pre><code> git init </code></pre></p>
+		<p> 3) Add the files to your new local repository. This stages them for the first commit: <pre><code>git add [name_file] OR git add . (to add all files)</code></pre> </p>
+		<p> 4) Commit the files that you've staged in your local repository <pre><code> git commit -m "your comment"</code></pre></p>
+		<p> 5) Copy the link of your repository on Github</p>
+		<p> 6) In terminal, add the URL for the remote repository where your local repository will be pushed: <pre><code> git remote add origin [link of your Github repository]
+ git remote -v
+		</code></pre> </p>
+		<p> Push the changes in your local repository to GitHub: git push origin master</p>
+
+{% endblock content %}

@@ -1,12 +1,14 @@
-<html>
-        <head>
-                <title>DigitalOcean</title>
-        </head>
-        <body>
-                <h1>Getting to know Digital Ocean</h1>
-        </body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 
-
-
-
+<h1>Getting to know Digital Ocean</h1>
+<h2>What is DigitalOcean?</h2>
+<p>It is a <a href="/usefull_terms/#cloud">cloud</a> hosting provider that offers cloud computing services.
+Unlike traditional hosting, solutions are not deployed on a single server.
+Instead, a network of connected virtual and physical cloud servers hosts the application or website, ensuring greater flexibility and scalability.</p>
+<p>To deploy DigitalOcean's Infrastructure as a Service <a href="/usefull_terms/#iaas">(IaaS)</a> environment, developers launch a private <a href="/usefull_terms/#vm">virtual machine (VM)</a> instance, which DigitalOcean calls a "droplet." 
+Developers choose the droplet's size, which geographical region and data center it will run in, and which Linux operating system it will use:
+Ubuntu, CentOS, Debian, Fedora, CoreOS or FreeBSD. <a href="/secure_shell">Secure Shell (SSH)</a> is also supported for secure communication.
+Instead of picking a Linux distribution, developers can also create droplets from existing VM images that come with pre-installed applications -- an option DigitalOcean calls "One-click Apps."</p>
+{% endblock content %}

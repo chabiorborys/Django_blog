@@ -61,3 +61,13 @@ class VimPageView(View):
     def get(self, request):
         context = {}
         return render(request, 'vim.html', context)
+
+class GithubVol1PageView(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'github_vol1.html', context)
+
+class UsefullTermsPageView(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'usefull_terms.html', context)

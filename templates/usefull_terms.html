@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>Usefull terms</h1>
+<h2><a name="cloud">Cloud</a></h2>
+<img src="{% static 'what-is-the-cloud.png' %}" style="width: 400px;height: 300px;">
+<p>The cloud enables users to access the same files and applications from almost any device, because the computing and storage takes place on servers in a data center,
+instead of locally on the user device.</p>
+<h2><a name="iaas">IaaS</a></h2>
+<p>Infrastructure-as-a-Service (IaaS), is a form of cloud computing that delivers fundamental compute, network and storage resources to consumers on-demand, over the internet,
+and on a pay-as-you-go basis. Iaas enables end users to scale and shrink resources on an as-needed basis, reducing the need for high, up-front capital expenditures.</p>
+<ul>
+<li>Physical data centers: IaaS providers will manage large data centers that contain the physical machines required to power users projects.</li>
+<li>Compute: IaaS providers manage the hypervisors and end users can then programmatically provision virtual "instances" with desired amounts of compute and memory. 
+Most providers offer both CPUs and GPUs for different types of workloads.Cloud compute also typically comes paired with supporting services like auto scaling and load balancing.</li>
+<li>Network:  Networking in the cloud is a form of Software Defined Networking in which traditional networking hardware, such as routers and switches, are made available programmatically,
+typically through APIs.</li>
+<li>Storage: The three primary types of cloud storage are block storage, file storage, and object storage.
+Block and file storage are common in traditional data centers but can often struggle with scale, performance and distributed characteristics of cloud. 
+Thus, of the three, object storage has thus become the most common mode of storage in the cloud given that it is highly distributed (and thus resilient), it leverages commodity hardware, 
+data can be accessed easily over HTTP, and scale is not only essentially limitless but performance scales linearly as the cluster grows. </li>
+</ul>
+<p>Key Features</p>
+<ul>
+    <li>Instead of purchasing hardware outright, users pay for IaaS on demand.</li>
+    <li>Infrastructure is scalable depending on processing and storage needs.</li>
+    <li>Saves enterprises the costs of buying and maintaining their own hardware.</li>
+    <li>Because data is on the cloud, there can be no single point of failure.</li>
+    <li>Enables the virtualization of administrative tasks, freeing up time for other work.</li>
+</ul>
+
+<p>Advantages</p>
+<ul>
+    <li>Pay-as-you-Go: Unlike traditional IT, IaaS does not require any upfront, capital expenditures, and end users are only billed for what they use.</li>
+    <li>Speed: With IaaS, users can provision small or vast amounts of resources in a matter of minutes, testing new ideas quickly or scaling proven ones even quicker.</li>
+    <li>Availability: Through things like multizone regions, the availability and resiliency of cloud applications can exceed traditional approaches.</li>
+    <li>Scale: With seemingly limitless capacity and the ability to scale resources either automatically or with some supervision,
+t’s simple to go from one instance of an application or workload to many.</li>
+    <li>    Latency and performance: Given the broad geographic footprint of most IaaS providers, it’s easy to put apps and services closers to your users,
+reducing latency and improving performance.</li>
+</ul>
+
+<h2>PaaS</h2>
+<p>Platform-as-a-Service (PaaS), is a cloud computing model that provides customers a complete platform - hardware, software and infrastructure - for developing,
+running and managing applications without the cost, complexity and inflexibility fo building and maintaining that platform on-premises.</p>
+<p>The Paas provider hosts everything - servers, networks, storage, operating system software, databases - at their data center; the customer uses it all
+for a monthly fee based on usage and can purchase more resources on-demand as needed.PaaS lets your development teams to build, test, deploy, maintain, update, and scale applications
+much more quickly and less expensively than they could if you had to build out and manage your own on-premises platform.</p>
+<p>Key Features</p>
+<ul>
+    <li>PaaS provides a platform with tools to test, develop and host applications in the same environment.</li>
+    <li>Enables organizations to focus on development without having to worry about underlying infrastructure.</li>
+    <li>Providers manage security, operating systems, server software and backups.</li>
+    <li>Facilitates collaborative work even if teams work remotely.</li>
+</ul>
+<p>Advantages</p>
+<ul>
+    <li>Faster time to market: With PaaS, there’s no need to purchase and install the hardware and software you’ll use to build and maintain your application development platform
+ and no need for development teams to wait while you do this. You simply tap into the cloud service provider’s PaaS resources and begin developing immediately.</li>
+    <li>Faster, easier, less-risky adoption of a wider range of resources: PaaS platforms typically include access to a greater variety of choices up and down the application
+ development stack—operating systems, middleware, and databases, and tools such as code libraries and app components—than you can affordably or practically maintain on-premises. It also lets you test new operating systems, languages, and tools without risk—that is, without having to invest in the infrastructure required to run them.</li>
+    <li>Easy, cost-effective scalability: If an application developed and hosted on-premises starts getting more traffic, you’ll need to purchase more computing, storage, and
+even network hardware to meet the demand, which you may not be able to do quickly enough and can be wasteful (since you typically purchase more than you need). 
+With PaaS, you can scale on-demand by purchasing just the amount of additional capacity you need.</li>
+    <li>Lower costs: Because there’s no infrastructure to build, your upfront costs are lower. Costs are also lower and more predictable because most PaaS providers charge customers
+based on usage.</li>
+</ul>
+
+<h2>SaaS</h2>
+<p>Software-as-a-Service (SaaS), is a cloud computing offering that provides users with access to a vendor's cloud-based software. Users do not install applications on their local devices. Instead, the applications reside on a remote cloud network accessed through the web or an API. Through the application, users can store and analyze data and collaborate on projects.</p>
+<p>Key Features</p>
+<ul>
+    <li>SaaS vendors provide users with software and applications via a subscription model.</li>
+    <li>Users do not have to manage, install or upgrade software; SaaS providers manage this.</li>
+    <li>Data is secure in the cloud; equipment failure does not result in loss of data.</li>
+    <li>Use of resources can be scaled depending on service needs.</li>
+    <li>Applications are accessible from almost any internet-connected device, from virtually anywhere in the world.</li>
+</ul>
+
+<h2><a name="vm">VM</a></h2>
+<p>Virtual machine (VM) is an emulation of a computer system. Virtual machines are based on computer architectures and provide functionality of a physical computer. Their implementations may involve specialized hardware, software, or a combination.</p>
+<p>There are different kinds of virtual machines, each with different functions:</p>
+<ul>
+    <li>System virtual machines - provide a substitute for a ream machine. They provide functionality needed to execute entire operating systems.</li>
+    <li>Process virtual machines - are designed to execute computer programs in a platform-independent environment. It runs as a normal application inside a host OS and supports a single process. It is created when that process is started and destroyed when it exits.</li> 
+</ul>
+{% endblock content %}
