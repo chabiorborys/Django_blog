@@ -4,4 +4,11 @@
         <h1>So you do want to contact me...</h1>
         <p> e-mail:<a href="mailto:chabiorborys@gmail.com"> chabiorborys@gmail.com </a></p>
         <p> phone number - +48 721 855 584 </p>
+        <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="form-actions">
+                        <button type="submit">Send</button>
+                </div>
+        </form>
 {% endblock content %}

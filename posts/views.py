@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views import View
+from django.http import HttpResponse
+from django.core.mail import send_mail
+from .forms import ContactForm
 
 
 class LandingPageView(View):
@@ -19,9 +22,23 @@ class AboutPageView(View):
 
 class ContactPageView(View):
     def get(self, request):
-        context = {}
-        return render(request, 'contact.html', context)
+            form = ContactForm()
+            return render(request, 'contact.html', {'form':form})
+            
+    def post(self, request):
+            form = ContactForm(request.POST)
+            if form.is_valid():
+                        name = form.cleaned_data['name']
+                        last_name = form.cleaned_data['last_name']
+                        subject = form.cleaned_data['subject']
+                        message = form.cleaned_data['message']
+                        sender = form.cleaned_data['sender']
 
+                        message = '{0} has sent you a new message:\n\n{1}'.format(name, form.cleaned_data['message'])
+                        send_mail('New Enquiry', message, sender, ['chabiorborys@gmail.com'])
+                        return HttpResponse('Thanks for sending an e-mail!')
+            return render(request, 'contact.html', {'form': form})
+    
 class CreatingScriptsPageView(View):
     def get(self, request):
         context = {}
