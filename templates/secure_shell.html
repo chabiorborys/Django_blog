@@ -1,49 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
 <h1>Getting to know Secure Shell(SSH)</h1>
 <h2>What is SSH?</h2>
 <p>SSH, or secure shell, is an encrypted protocol used to administer and communicate with servers.</p>
-<h2> How does SSH keys work?</h2>
-<p>An SSH server can authenticate clients using a variety of different methods. The most basic of these is password authentication, which is easy to use, but not the most secure.</p>
-<p>Although passwords are sent to the server in a secure manner, they are generally not complex or long enough to be resistant to repeated, persistent attackers.</p>
-<p>SSH keys prove to be a reliable and secure alternative.</p>
-<h3>Nice, but what are those keys, you may ask.</h3>
-<p>Well, SSH key pairs are two cryptographically secure keys that can be used to authenticate a client to an SSH server. Each key pair consists of a public key and a private key.</p>
-<p>The PRIVATE KEY is retained by the client and should be kept absolutely secret. Any compromise of the private key will allow the attacker to log into servers that are configured with the associated public key without additional authentication. As an additional precaution, the key can be encrypted on disk with a passphrase.<p>
-<p>The PUBLIC KEY is uploaded to a remote server that you want to be able to log into with SSH. The key is added to a special file within the user account you will be logging into called ~/.ssh/authorized_keys.</p>
-<p>When a client attempts to authenticate using SSH keys, the server can test the client on whether they are in possession of the private key. If the client can prove that it owns the private key, a shell session is spawned or the requested command is executed.</p>
-<h3>Ok, where do I start?</h3>
-<p>The first step to configure SSH key authentication to your server is to generate an SSH key pair on your local computer.</p>
-<p>Write in terminal: <pre><code>ssh-keygen </code></pre></p>
-<p>You will get:</p>
-<p><pre><code>Generating public/private rsa key pair.
-Enter file in which to save the key (/home/username/.ssh/id_rsa):</code></pre></p>
-<h4>If you had previously generated an SSH key pair, you may see a prompt that looks like this:</h4>
-<p><pre><code>/home/username/.ssh/id_rsa already exists.
-Overwrite (y/n)?</code></pre></p>
-<p>If you choose to overwrite the key on disk, you will not be able to authenticate using the previous key anymore.</p>
-<h4>If everything goes according to plan, you shoud get something like this:</h4>
-<p><pre><code>Created directory '/home/username/.ssh'.
-Enter passphrase (empty for no passphrase):
-Enter same passphrase again:</code></pre> </p>
-<p>A passphrase is an optional addition. If you enter one, you will have to provide it every time you use this key (unless you are running SSH agent software that stores the decrypted key).</p>
-<h3> Bingo! Now you have a public and private key that you can use to authenticate. The next step is to place the public key on your server so that you can use SSH key authentication to log in.</h3>
-<h4> P.S: That's how you know that you did a fine job: </h4>
-<p>Your identification has been saved in:<pre><code>/home/username/.ssh/id_rsa.
-Your public key has been saved in /home/username/.ssh/id_rsa.pub.
-The key fingerprint is:
-a9:49:2e:2a:5e:33:3e:a9:de:4e:77:11:58:b6:90:26 username@remote_host
-The key's randomart image is:</code></pre> 
-        <pre><code>   +--[ RSA 2048]----+    
-  |     ..o         |    
-  |   E o= .        |    
-  |    o. o         |    
-  |        ..       |    
-  |      ..S        |    
-  |     o o.        |    
-  |   =o.+.         |    
-  |. =++..          |    
-  |o=++.            |  
-  +-----------------+</p></code></pre>
+
+<div class="container">
+  <h2>Secure Shell Topics</h2>
+  <ul class="list-group">
+          <li class="list-group-item"><a href="/secure_shell2">Contact form issue</a></li>
+          <li class="list-group-item"><a href="/secure_shell1">SSH Keys</a></li>
+  </ul>
 {% endblock content %}

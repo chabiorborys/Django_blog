@@ -18,8 +18,15 @@ urlpatterns = [
     path('docker/', views.DockerPageView.as_view()),
     path('vim/', views.VimPageView.as_view()),
     path('creating_scripts/', views.CreatingScriptsPageView.as_view()),
+    path('java_script/', views.JavaScriptPageView.as_view()),
+    path('dom_access_methods/', views.DomAccessMethodsPageView.as_view()),
+    path('modifying_existing_element/', views.ModifyingExistingElementPageView.as_view()),
+    path('dom_events/', views.DomEvents.as_view()),
+    path('dom_animation/', views.DomAnimation.as_view()),
     path('github_vol1/', views.GithubVol1PageView.as_view()),
     path('usefull_terms/', views.UsefullTermsPageView.as_view()),
+    path('secure_shell1/', views.SecureShell1PageView.as_view()),
+    path('secure_shell2/', views.SecureShell2PageView.as_view()),
 ]
 
 

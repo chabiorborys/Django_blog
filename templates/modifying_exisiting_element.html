@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1>Modifying an existing element</h1>
+<h2>Modifying attributes</h2>
+<p>You can set an attribute on an element by setting the propoerty of the same name. For example, to change the src of
+    an < img>:
+        <pre><code>imgEl.src = "http://www.dogs.com/dog.gif";</code></pre>
+</p>
+<p>In addition, you can also use the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute"
+        target=_blank>setAttribute</a>, method like so:
+<pre><code>imgEl.setAttribute("src", "http://www.dogs.com/dog.gif");</code></pre>
+</p>
+<p>If you want to remove an attribute, you should do that with <a
+        href="https://developer.mozilla.org/en-US/docs/Web/API/Element/removeAttribute">removeAttribute</a> - like to
+    remove the disabled attribute off a button, effectively enabling it:
+<pre><code>img.El.removeAttribute("disabled");</code></pre>
+</p>
+<h2>Modifying styles</h2>
+<p>You can change styles just like how you change attributes, by accessing the 'style' property of the element, an
+    setting the corresponding property. For example, to change the color:
+<pre><code>headingEl.style.color = "hotpink";</code></pre>
+</p>
+<p>Remember to "camelCase" the multi-word CSS property names, since hyphens are not valid JS property names:
+<pre><code>headingEl.style.backgroundColor = "salmon";</code></pre>
+</p>
+<h2>Modifying class names</h2>
+<p>To add a class to an element, you can set the 'className' property:
+<pre><code>mainEl.className = "warning";</code></pre>
+</p>
+<p>That will override any existing classes, so you should do this instead if you just want to add to the list of
+    classes:
+<pre><code>mainEl.className += "warning";</code></pre>
+</p>
+<p>In newer browsers, you can use the <a
+        href="https://developer.mozilla.org/en-US/docs/Web/API/Element/classList" target="=_blank">classList</a> functionality instead:
+<pre><code>main.El.classList.add("warning");</code></pre>
+</p>
+<h2>Modifying inner HTML/text</h2>
+<p>To completely replace the contents of an element with an arbitrary string of HTML, use <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML">innerHTML</a>:<pre><code>mainEl.innerHTML = "Who is the cutest?";</code></pre></p>
+<p>If you don't need to pass in HTML tags, you should use <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent">textContent</a>instead:<pre><code>mainEl.textContent = "You are the cutest";</code></pre></p>
+<p>Generally, you should be careful when using either of these 2 properties, because they will remove event listeners.</p>
+<h2>Creating elements from scratch</h2>
+<p>There is a whole set of functions that you can use to create entirely new elements and add them to the page.</p>
+<p>To create a new element, use the aptly named <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement" target="_blank">createElement</a>:<pre><code>var imgEL = document.createElement("img");</code></pre></p>
+<p>To append it to the page, call <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild" target="_blank">appendChild</a><pre><code>document.body.appendChild(imgEl);</code></pre></p>
+<p>Similarly, you can also use <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore">insertBefore</a><a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/replaceChild">replaceChild</a><a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/removeChild">removeChild</a><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML">insertAdjacentHTML</a>.</p>
+{% endblock content %}

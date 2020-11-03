@@ -1,0 +1,54 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<h1>Dom animation</h1>
+<p>We have couple of different techniques which allow us to animate parts of our webpage:</p>
+<ul>
+    <li>window.setInterval</li>
+    <li>window.requestAnimationFrame</li>
+    <li>CSS animations/transitions</li>
+</ul>
+<h3>window.setInterval</h3>
+<p>Usually animation means that an object will move, so it needs to do an action more then once. Therefore, we want to call a function, that sets a motion, on an interval, which means a certain number of times per second. For this, we can use 'window.setInterval()'.
+    It takes two arguments: the callback function, and the number of milliseconds to wait before that function gets called back again.</p>
+<button id="button" type="button">Reset timer</button>
+<h4>Countdown: <span id="countdown">10</span></h4>
+<pre><code>&lt;button id="button" type="button">Reset timer&lt;/button>
+&lt;h4>Countdown:&lt;span id="countdown">10&lt;/span>&lt;/h4>
+&ltscript>
+    var countdown = document.getElementById("countdown");
+    var countItDown = funcition() {
+        var currentTime = parseFloat(countdown.textContent);
+        if (currentTime > 0) {
+            countdown.textContent = currentTime -1;
+        } else {
+            window.clearInterval(timer);
+        }
+    };
+    var timer = window.setInterval(countItDown, 1000);
+
+    var button = document.getElementById("button");
+    var resetTimer = function() {
+        countdown.textContent = 100;
+    };
+    button.addEventListner("click",resetTimer);
+    &lt/script>
+</code></pre>
+<script>
+    var countdown = document.getElementById("countdown");
+    var countItDown = function() {
+        var currentTime = parseFloat(countdown.textContent);
+        if (currentTime > 0) {
+            countdown.textContent = currentTime - 1;
+        } else {
+            window.clearInterval(timer);
+        }
+    };
+    var timer = window.setInterval(countItDown, 1000);
+
+    var button = document.getElementById("button");
+    var resetTimer = function() {
+        countdown.textContent = 10;
+    };
+    button.addEventListener("click", resetTimer);
+</script>
+
+{% endblock content %}

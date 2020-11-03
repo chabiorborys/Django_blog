@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1>Why access methods are important?</h1>
+<p>If there is something you want to change in your website, it would be a good idea to locate it and then get access to
+    it.
+    You need to be specific with computer, otherwise it want do what you are asking for or in worst case scenerio, it
+    will do the opposite. Therefore, with access
+    methods you are able to precisely outline, what object you want to work on. </p>
+<h2>What methods can we use?</h2>
+<ul>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById"
+            target="_blank">document.getElementById(id)</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByClassName"
+            target="_blank">document.getElementsByClassName(className)</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/document/getElementsByTagName"
+            target="_blank">document.getElementsByTagName(tagName)</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector"
+            target="_blank">document.querySelector(cssSelector)</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll"
+            target="_blank">document.querySelectorAll(cssSelector)</a></li>
+</ul>
+<h2>What do they return?</h2>
+<p>There are two methods that return a single Element object, <code>getElementById</code> and
+    <code>querySelector</code>:
+<pre><code>var salsMotto = document.getElementById("salsMotto");</code></pre>
+<pre><code>salsMotto.innerHTML = "Math is cool";</code></pre>
+</p>
+<p>The methods <code>getElementsByClassName</code>and <code>getElementsByTagName</code> return an
+    <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection">HTMLCollection</a> object that acts like
+    an array.
+    That collection is "live", which means the collection is updated if additional elements with tag name or class name
+    are added to the document
+<pre><code> var teamMembers = document.getElementsByClassName("team-member");</pre></code>
+<pre><code>for (var i = 0; i < teamMembers.length; i++){
+</code></pre>
+<pre><code>console.log(teamMembers[i].innerHTML);}</code></pre>
+</p>
+<h2>Accessing with sub-queries</h2>
+<p>Once you've found an element, you can do subqueries on it using the methods we've just shown. For example:
+<pre><code>//find the element with that ID</code></pre>
+<pre><code>var salsMotto = document.getElementById("salsMotto");</code></pre>
+<pre><code>
+//find the spans inside that element:</code></pre>
+<pre><code>var mottoWords = salsMotto.getElementsByTagName("span");</code></pre>
+<pre><code>
+//log out how many there are</code></pre>
+<pre><code>console.log(mottoWords.length);</code></pre></code></p>
+
+{% endblock content %}

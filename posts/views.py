@@ -79,6 +79,31 @@ class VimPageView(View):
         context = {}
         return render(request, 'vim.html', context)
 
+class JavaScriptPageView(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'java_script.html', context)
+
+class DomAccessMethodsPageView(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'dom_access_methods.html', context)
+    
+class ModifyingExistingElementPageView(View):
+    def get(self, request):
+        context = {}
+        return render(request,'modifying_exisiting_element.html', context)
+
+class DomEvents(View):
+    def get(self, request):
+        context = {}
+        return render(request,'dom_events.html', context)
+
+class DomAnimation(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'dom_animation.html', context)
+                
 class GithubVol1PageView(View):
     def get(self, request):
         context = {}
@@ -88,3 +113,13 @@ class UsefullTermsPageView(View):
     def get(self, request):
         context = {}
         return render(request, 'usefull_terms.html', context)
+
+class SecureShell1PageView(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'secure_shell1.html', context)
+
+class SecureShell2PageView(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'secure_shell2.html', context)

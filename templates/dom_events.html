@@ -1,0 +1,68 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<h1>Adding events</h1>
+<h2>Adding event listeners</h2>
+<p>To make sure that the browser calls a particualar function when an event happens on an element, you must use <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">document.addEventListener</a>:
+    <pre><code>var buttonEl = document.getElementById("clicker");</code><br><code>var onButtonClick = function() {</code><br><code>    console.log("Oh nice, you clicked me!");</code><br><code>};</code><br><code>buttonEl.addEventListener("click", onButtonClick);</codE></pre>
+</p>
+<h2>Examples</h2>
+<h3>Changing content of a button after a click.</h3>
+<button id="clicker">Click and see the difference</button>
+<div class="js-code">
+    <pre><code>&lt;button id="clicker">Click and see the difference&lt;/button&gt;<br>&lt;script&gt;<br>var clickerButton = document.getElementById("clicker");<br>var onButtonClick = function () { <br>    clickerButton.textContent =     "You clicked me!";<br>}<br>clickerButton.addEventListener("click", onButtonClick);<br>&lt;/script&gt;</code></pre>
+</div>
+<h3>Processing forms with events</h3>
+<label>What's your name?
+<input id="name" type="text">
+</label><br>
+<label>What language do you speak?
+    <select id="lang">
+        <option value="en">English</option>
+        <option value="pl">Polish</option>
+        <option value="es">Spanish</option>
+    </select>
+</label><br>
+<button id="button" type="button">Click me!</button>
+<div id="message"></div>
+<pre><code>&lt;label&gt;What's your name?<br>&lt;input id="name type="text"&gt;<br>&lt;/label&gt;&lt;br&gt;<br>&lt;label>What language do you speak?<br>  &lt;select id="lang><br>    &lt;option value="en">English&lt;/option><br>    &lt;option value="pl">Polish&lt;/option><br>    &lt;option value="es">Spanish&lt;/option><br>  &lt;/select>
+&lt;/label>&lt;br><br>&lt;button id="button" type="button">Click me!&lt;/button><br>&lt;div id="message">&lt;/div><br>&lt;script>
+var button = document.getElementById("button");
+var formButtonClick = function() {
+        document.getElementById("message").textContent = "";
+        var name = document.getElementById("name").value;
+        var lang = document.getElementById("lang").value;
+        var greeting;
+        if (lang === "en") {
+                greeting = "Hey " + name;
+        } else if (lang === "pl") {
+                greeting = "Cześć " + name;
+        } else {
+                greeting = "Hola " + name;
+        }
+        document.getElementById("message").textContent += greeting;
+};
+button.addEventListener("click", formButtonClick);
+&lt;script></code></pre>
+<script>
+    var clickerButton = document.getElementById("clicker");
+    var onButtonClick = function() {
+        clickerButton.textContent = "You clicked me!";
+    }
+    clickerButton.addEventListener("click", onButtonClick);
+    var button = document.getElementById("button");
+    var formButtonClick = function() {
+        document.getElementById("message").textContent = "";
+        var name = document.getElementById("name").value;
+        var lang = document.getElementById("lang").value;
+        var greeting;
+        if (lang === "en") {
+            greeting = "Hey " + name;
+        } else if (lang === "pl") {
+            greeting = "Cześć " + name;
+        } else {
+            greeting = "Hola " + name;
+        }
+        document.getElementById("message").textContent += greeting;
+    };
+    button.addEventListener("click", formButtonClick);
+</script>
+{% endblock content %}

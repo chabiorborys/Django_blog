@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1>Issues that came up</h1>
+<h2>Standard Output and  Standard Error issue, when receiving a contact form</h2>
+<p>I have decided to add a contact form that allows a user to send an e-mail to me. In order to keep it simple, I chose to make e-mails appear in my terminal/command prompt window.</p>
+<p>After some work, I came to a point where given e-mail message would appear in a terminal but only if it was running (terminal I mean) The moment I would close it and try to send a message again, I would get an error that looked like this:</p>
+<img src="{% static 'input_error_issue.png' %}" style="width:600px;height: 100px;">
+<p> After some research and frustrating moments (ok, this time it wasn't that frustraiting) I found out that:</p>
+<ul>
+<li>You have 3 devices from which your program takes information about what is happening within itslef and returns it to you:</li>
+<ol start="0">
+    <li>Standard Input</li>
+    <li>Standard Output</li>
+    <li>Standard Error</li>
+</ol>  
+<p>Numbers in front are important. Each represents its given 'value'. </p>  
+<li>The moment you turn off your terminal, your application can't print stuff as its command line is not running (daaaa). This is important because you ask it to print something the moment someone sends you an e-mail.</li>
+<li>If it can't print stuff it will look and finally, FIND A WAY to rub it in your face (like your gf/wife). How? Well, look above. </li>
+</ul>
+<p>Therefore, you need to find a way that will allow your application to tell you everything it want's somewhere. How? Let me show you</p>
+<p>Turn on your terminal and type:<pre><code>python manage.py runserver 0.0.0.0:80 > log.txt &</code></pre> By doing so, all your SO(standard output) will be saved in log.txt file.</p>
+<p>With this command we are almost there. However, if you will try to check if it works, your application will return error. Why? Because Standar Error also needs to be able to print what it has to say. Thus, we need can either add SE(standard error) to log.txt or create a new .txt file. I will show the first option as this is the one I got to know.</p>
+<p>Open your terminal and write <pre><code>python3 manage.py runserve 0.0.0.0:80 > log.txt 2>&1 &</code></pre> Now, both SO and SE will print whatever it has to print in log.txt file</p>
+<p>In order to see later if your system wants to tell you something you will need to read given file:<pre><code>cat log.txt</code></pre>in this case.</p>
+{% endblock content %}
