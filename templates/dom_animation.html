@@ -1,4 +1,5 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
+
 <h1>Dom animation</h1>
 <p>We have couple of different techniques which allow us to animate parts of our webpage:</p>
 <ul>
@@ -6,6 +7,7 @@
     <li>window.requestAnimationFrame</li>
     <li>CSS animations/transitions</li>
 </ul>
+<hr>
 <h3>window.setInterval</h3>
 <p>Usually animation means that an object will move, so it needs to do an action more then once. Therefore, we want to call a function, that sets a motion, on an interval, which means a certain number of times per second. For this, we can use 'window.setInterval()'.
     It takes two arguments: the callback function, and the number of milliseconds to wait before that function gets called back again.</p>
@@ -32,6 +34,81 @@
     button.addEventListner("click",resetTimer);
     &lt/script>
 </code></pre>
+<hr>
+<h3>window.requestAnimationFrame</h3>
+<p>This method tells the browser that you wish to perform an animation and requests that the browser calls a specific function to update an animation before the next repaint. You should call this method whenever you're ready to update your animation on screen.
+    This will request that your animation function be called before the browser performs the next repaint.</p>
+<p>Let's make it smaller each second</p>
+<button id="buttonStop" type="button">Stop!</button>
+<br>
+<div class="mouth-position">
+    <img id="mouth" src="{% static 'mouth.jpeg' %}">
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<pre><code>&lt;img id="mouth" src="{% static 'mouth.jpeg' %}">
+&lt;script>
+    var mouth = document.getElementById("mouth");
+    mouth.style.width = "50px";
+    var startTime = new Date().getTime();
+    var shrinkMouth = function () {
+        var currTime = new Date().getTime();
+        var newWidth = (100 - ((currTime - startTime)/100)*30);
+        mouth.style.width = newWidth + "px";
+
+        if (newWidth > 10) {
+            window.requestAnimationFrame(shrinkMouth);
+        } else {
+            mouth.style.width = "50px";
+            startTime = new Date().getTime();
+            window.requestAnimationFrame(shrinkMouth);
+        }
+    };
+    shrinkMouth();
+    &lt;/script>
+</code></pre>
+<hr>
+<h3>CSS animations/transitions</h3>
+<p>This method makes it possible to animate transitions from one CSS style configuration to another. Animations consist of two components, a style describing the CSS animation and a set of keyframes that indicate the start and end states of the animation's
+    style, as well as possible intermediate waypoints.Advantages:</p>
+<ul>
+    <li>They're easy to use for simple animations. You can create them without using JS.</li>
+    <li>The animations run well, even under moderate system load. Simple animations can often perform poorly in JS.</li>
+    <li>Letting the browser control the animation sequence lets the browsser optimize performance, for example, reducing the update frequency of animations running in tabs that aren't currently visible.</li>
+</ul>
+<p>This <span id="letter"><strong>letter</strong></span> is getting bigger!</p>
+<pre><code>&lt;head>
+    &lt;style>
+        @keyframes getbigger {
+            from {
+                width: 50px;
+            }
+            to {
+                width: 300px;
+            }
+        }
+        #image {
+            animation-name: getbigger;
+            animation-duration: 3s;
+        }
+        #letter:hover {
+            font-size: 150px;
+            transition: font-size 1s linear;
+        }
+    &lt;/style>
+&lt;/head>
+&lt;body>
+    &lt;img id="image" src="">
+    &lt;p>The &lt;span id="letter">letter&lt;/span>is getting bigger!&lt;/p>
+&lt;/body>    
+</code></pre>
+
 <script>
     var countdown = document.getElementById("countdown");
     var countItDown = function() {
@@ -49,6 +126,30 @@
         countdown.textContent = 10;
     };
     button.addEventListener("click", resetTimer);
-</script>
 
-{% endblock content %}
+    var mouth = document.getElementById("mouth");
+    mouth.style.width = "50px";
+    var mouthAnimationRunning = true;
+    var startTime = new Date().getTime();
+    var shrinkMouth = function() {
+
+        if (mouthAnimationRunning) {
+            var currTime = new Date().getTime();
+            var newWidth = (100 - ((currTime - startTime) / 1000) * 30);
+            mouth.style.width = newWidth + "px";
+            if (newWidth < 10) {
+                //Reset to original size
+                mouth.style.width = "50px";
+                startTime = new Date().getTime();
+            }
+        };
+        window.requestAnimationFrame(shrinkMouth);
+    };
+
+    shrinkMouth();
+    var buttonStop = document.getElementById("buttonStop");
+    buttonStop.addEventListener("click", function() {
+        mouthAnimationRunning = !mouthAnimationRunning
+    });
+</script>
+<hr> {% endblock content %}

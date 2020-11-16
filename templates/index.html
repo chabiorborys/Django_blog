@@ -1,7 +1,26 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block content %}  
-        <h1>Hi there! My goal is to create a website from scratch and take notes of my journey.</h1>
-        <img src="https://media.giphy.com/media/11SIBu3s72Co8w/giphy.gif" class="image">
-{% endblock content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 
+<h1>Hi there! My goal is to create a website from scratch and take notes of my journey.</h1>
+<img src="https://media.giphy.com/media/11SIBu3s72Co8w/giphy.gif" class="image">
+<div class="container totoro-container">
+    dsdadsadda<img id="totoro" src="https://media.giphy.com/media/omHPYZttAVAAw/giphy.gif">
+</div>
+<script>
+    var totoro = document.getElementById("totoro");
+    var startTime = new Date().getTime();
+    var walkTotoro = function() {
+        var currTime = new Date().getTime();
+        var secondsElapsed = ((currTime - startTime) / 1000);
+        var newPosition = secondsElapsed * 60;
+        totoro.style.right = newPosition + "px";
+        if (newPosition < 2000) {
+            window.requestAnimationFrame(walkTotoro);
+        } else {
+            totoro.style.right = "10px";
+            startTime = new Date().getTime();
+            window.requestAnimationFrame(walkTotoro);
+        };
+    };
+    walkTotoro();
+</script>
+{% endblock content %}

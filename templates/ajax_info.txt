@@ -1,0 +1,1 @@
+<strong>You see?! That's how Ajax works.</strong>

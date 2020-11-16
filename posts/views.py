@@ -103,7 +103,17 @@ class DomAnimation(View):
     def get(self, request):
         context = {}
         return render(request, 'dom_animation.html', context)
-                
+
+class AjaxView(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'ajax.html', context)
+
+class AjaxInfoView(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'ajax_info.txt', context)
+
 class GithubVol1PageView(View):
     def get(self, request):
         context = {}

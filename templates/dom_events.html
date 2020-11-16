@@ -4,12 +4,14 @@
 <p>To make sure that the browser calls a particualar function when an event happens on an element, you must use <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">document.addEventListener</a>:
     <pre><code>var buttonEl = document.getElementById("clicker");</code><br><code>var onButtonClick = function() {</code><br><code>    console.log("Oh nice, you clicked me!");</code><br><code>};</code><br><code>buttonEl.addEventListener("click", onButtonClick);</codE></pre>
 </p>
+<hr>
 <h2>Examples</h2>
 <h3>Changing content of a button after a click.</h3>
 <button id="clicker">Click and see the difference</button>
 <div class="js-code">
     <pre><code>&lt;button id="clicker">Click and see the difference&lt;/button&gt;<br>&lt;script&gt;<br>var clickerButton = document.getElementById("clicker");<br>var onButtonClick = function () { <br>    clickerButton.textContent =     "You clicked me!";<br>}<br>clickerButton.addEventListener("click", onButtonClick);<br>&lt;/script&gt;</code></pre>
 </div>
+<hr>
 <h3>Processing forms with events</h3>
 <label>What's your name?
 <input id="name" type="text">

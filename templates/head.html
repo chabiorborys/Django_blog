@@ -11,6 +11,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
+        body {
+            background: rgb(255, 249, 249);
+            background: linear-gradient(90deg, rgba(255, 249, 249, 1) 0%, rgba(222, 222, 222, 1) 100%, rgba(108, 78, 96, 1) 100%);
+        }
+        
         .content {
             max-width: 900px;
             margin: auto;
@@ -24,6 +29,7 @@
         }
         
         p {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
             font-size: medium;
         }
         
@@ -49,14 +55,34 @@
             margin-bottom: 20px;
         }
         
-        .mustache {
-            background: black;
-            width: 5px;
-            height: 5px;
+        #letter:hover {
+            font-size: 20px;
+            transition: font-size 1s linear;
+        }
+        
+        .container {
+            position: relative;
+            /* text-align: center; */
+            color: white;
+        }
+        
+        #totoro {
             position: absolute;
-            border-radius: 2px;
-            top: 725px;
-            left: 520px;
+            top: 0px;
+            right: -50%;
+        }
+        
+        .totoro-container {
+            position: absolute;
+            left: -50%;
+            line-height: 370px;
+            width: 150%;
+            background-color: white;
+        }
+        
+        .mouth-position {
+            position: absolute;
+            margin: 10px;
         }
     </style>
 </head>

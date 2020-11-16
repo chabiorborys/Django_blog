@@ -1,0 +1,69 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<h1>AJAX</h1>
+<p>AJAX = <strong>A</strong>synchronous<strong>J</strong>avaScript<strong>A</strong>nd<strong>X</strong>ML. It uses a combination of:</p>
+<ul>
+    <li>A broser built-in XMLHttpRequest object (to request data from a web server</li>
+    <li>JavaScript and HTML DOM (to display or use the data)</li>
+</ul>
+<p>AJAX allows web pages to be updated asynchronously by exchanging data with a web server behind the scenes. This means that it is possible to update parts of a web page, without reloading the whole page.</p>
+<hr>
+<h2>How AJAX works</h2>
+<img src="{% static 'how_ajax_works.gif' %}">
+<ol>
+    <li>An event occurs in a web page (the page is loaded, a button is clicked)</li>
+    <li>An XMLHttpRequest object is created by JavaScript</li>
+    <li>The XMLHttpRequest object sends a request to a web server</li>
+    <li>The server processes the request</li>
+    <li>The server sends a response back to the web page</li>
+    <li>The response is read by JavaScript</li>
+    <li>Proper action (like page update) is preformed by JavaScript</li>
+</ol>
+<h2>The XMLHttpRequest Object</h2>
+<p>The XMLHttpRequest object can be used to exchange data with a web server behind the scenes. This means that it is possible to update parts of a web page, without reloading the whole page.</p>
+<h3>Syntax for creating an XMLHttpRequest object:</h3>
+<p>
+    <bold>variable</bold> = new XMLHttpRequest(); :</p>
+<pre><code>var xhttp = new XMLHttpRequest();</code></pre>
+<h2>Access Across Domains</h2>
+<p>For security reasons, modern browsers do not allow access across domains. This means that both the web page and the XML file it tries to load, must be located on the same server.</p>
+<h2>AJAX example</h2>
+<div id="demo">
+    <button type="button" onclick="loadDoc()">Change content</button>
+</div>
+<pre><code>    <strong>ajax.html</strong> 
+&ltbutton type="button onclick="loadDoc()">Change content&lt/button>
+&ltscript>
+    funtion loadDoc() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("demo").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", "/ajax_info", true);
+        xhttp.send();
+    }
+    <strong>views.py</strong>
+class AjaxInfoView(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'ajax_info.txt', context)
+    <strong>urls.py</strong>
+path('ajax_info/', views.AjaxInfoView.as_view(),)
+    <strong>ajax_info.txt</strong>
+You see?! That's how Ajax works.
+</code></pre>
+
+<script>
+    function loadDoc() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("demo").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", "/ajax_info", true);
+        xhttp.send();
+    }
+</script>
+{% endblock content %}
