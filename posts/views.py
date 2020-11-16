@@ -114,6 +114,11 @@ class AjaxInfoView(View):
         context = {}
         return render(request, 'ajax_info.txt', context)
 
+class JSMethodsView(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'js_methods.html', context)
+
 class GithubVol1PageView(View):
     def get(self, request):
         context = {}

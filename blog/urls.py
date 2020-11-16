@@ -29,6 +29,7 @@ urlpatterns = [
     path('usefull_terms/', views.UsefullTermsPageView.as_view()),
     path('secure_shell1/', views.SecureShell1PageView.as_view()),
     path('secure_shell2/', views.SecureShell2PageView.as_view()),
+    path('js_methods/', views.JSMethodsView.as_view()),
 ]
 
 

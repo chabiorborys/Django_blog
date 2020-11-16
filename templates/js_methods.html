@@ -1,0 +1,88 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<h1>JavaScript methods</h1>
+<p>When writing your JS code there is a great chance that they will come in handy. I will keep here all the methods that I used whilst doing exercises on Code Wars.</p>
+<h3>String split() Method</h3>
+<p>The split() method is used to split a string into an array of substrings, and returns the new array.</p>
+<p id="split">ABCDEFG</p>
+<button onclick="splitFunction()">Split</button>
+<pre><code>&lt;p id="split">ABCDEFG&lt;/p>
+&lt;button onclick="splitFunction()">Split&lt;/button>
+&lt;script>
+    function splitFunction() {
+        var str = 'ABCDEFG';
+        var res = str.split("");
+        document.getElementById("split").innerHTML = res;
+    }
+&lt;/script>
+</code></pre>
+<hr>
+<h3>Array slice() Method</h3>
+<p>This method returns the selected elements in an array, as a new array object. The slice() method selects the elements starting ar the given <i>start</i> argument, and ends at, <i>but does not include,</i> the given <i>end</i> argument.</p>
+<p id="slice">var fruits = ['Apple', 'Bannana', 'Lemon', 'Mango', 'Orange']</p>
+<p>var new_fruit = fruits.slice(1,3)</p>
+<button onclick="sliceFunction()">Slice</button>
+<pre><code>&lt;p id="slice">var fruits = ['Apple', 'Bannana', 'Lemon', 'Mango', 'Orange']&lt;/p>
+&lt;button onclick="sliceFunction()">Slice&lt;/button>
+&lt;script>
+    function sliceFunction() {
+        var fruits = ['Apple', 'Banana', 'Lemon', 'Mango', 'Orange'];
+        var new_fruits = fruits.slice(1,3);
+        document.getElementById("slice").innerHTML = new_fruits;
+    }
+&lt;/script>
+</code></pre>
+<hr>
+<h3>Array reverse() Method</h3>
+<p>This method reverses the order of the elements in an array. It will change an original array.</p>
+<p id="reverse">var transport = ['Car', 'Bike', 'Plane', 'Train'];</p>
+<button onclick="reverseFunction()">Reverse</button>
+<pre><code>&lt;p id="reverse">var transport = ['Car', 'Bike', 'Plane', 'Train']&lt;/p>
+&lt;button onclick="reverseFunction()">Reverse&lt;/button>
+&lt;script>
+    function reverseFunction() {
+        var transport = ['Car', 'Bike', 'Plane', 'Train'];
+        var rev_trans = transport.reverse();
+        document.getElementById("reverse").innerHTML = rev_trans; 
+    }
+&lt;/script>
+</code></pre>
+<hr>
+<h3>Arry join() Method</h3>
+<p>This method returns the array as a string.The elements will be separated by a sepcified separator. The deafualt separator is comma (,). This method will not change the original array.</p>
+<p id="join">var languages = ['Python', 'Java', 'C#', 'Ruby', 'PHP']</p>
+<button onclick="joinFunction()">Join</button>
+<pre><code>&lt;p id="join">var languages = ['Python', 'Java', 'C#', 'Ruby', 'PHP']&lt;/p>
+&lt;button onclick="joinFunction()">Join&lt;/button>
+&lt;script>
+    function joinFunction() {
+        var languages = ['Python', 'Java', 'C#', 'Ruby', 'PHP'];
+        var join_lang = languages.join();
+    document.getElementById("join").innerHTML = join_lang;
+    }
+</code></pre>
+<script>
+    function splitFunction() {
+        var str = 'ABCDEFG';
+        var res = str.split("");
+        document.getElementById("split").innerHTML = res;
+    }
+
+    function sliceFunction() {
+        var fruits = ['Apple', 'Banana', 'Lemon', 'Mango', 'Orange'];
+        var new_fruits = fruits.slice(1, 3);
+        document.getElementById("slice").innerHTML = new_fruits;
+    }
+
+    function reverseFunction() {
+        var transport = ['Car', 'Bike', 'Plane', 'Train'];
+        var rev_trans = transport.reverse();
+        document.getElementById("reverse").innerHTML = rev_trans;
+    }
+
+    function joinFunction() {
+        var languages = ['Python', 'Java', 'C#', 'Ruby', 'PHP'];
+        var join_lang = languages.join();
+        document.getElementById("join").innerHTML = join_lang;
+    }
+</script>
+{% endblock content %}
