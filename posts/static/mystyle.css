@@ -30,3 +30,8 @@
     background-color: #4CAF50;
     color: white;
 }
+
+.buttons {
+    display: inline-block;
+    margin-right: 5px;
+}

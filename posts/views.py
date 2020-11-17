@@ -114,6 +114,16 @@ class AjaxInfoView(View):
         context = {}
         return render(request, 'ajax_info.txt', context)
 
+class JsCodeWarsView(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'js_codewars.html', context)
+
+class JsCodeWarsExercisesDoneView(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'codewars_exercises_done.html', context)
+
 class JSMethodsView(View):
     def get(self, request):
         context = {}

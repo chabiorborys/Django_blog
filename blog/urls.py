@@ -25,6 +25,9 @@ urlpatterns = [
     path('dom_animation/', views.DomAnimation.as_view()),
     path('ajax/', views.AjaxView.as_view()),
     path('ajax_info/', views.AjaxInfoView.as_view()),
+    path('js_codewars/', views.JsCodeWarsView.as_view()),
+    path('codewars_exercises_done/', views.JsCodeWarsExercisesDoneView.as_view
+    ()),
     path('github_vol1/', views.GithubVol1PageView.as_view()),
     path('usefull_terms/', views.UsefullTermsPageView.as_view()),
     path('secure_shell1/', views.SecureShell1PageView.as_view()),

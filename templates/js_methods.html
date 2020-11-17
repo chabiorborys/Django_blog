@@ -60,6 +60,68 @@
     document.getElementById("join").innerHTML = join_lang;
     }
 </code></pre>
+<hr>
+<h3>Number toString() Method</h3>
+<p>This method converts a number to a string.</p>
+<p id="toString">var num = 13;</p>
+<button onclick="toStringg()">toString</button>
+<pre><code>&lt;p id="toString">var num = 13;&lt;/p>
+&lt;button onclick="toStringg()">toString&lt;/button>
+&lt;script>
+    function toStringg() {
+        var number = 13;
+        var numString = number.toString();
+        document.getElementById("toString").innerHTML = numString;
+    }
+&lt;/script>
+</code></pre>
+<hr>
+<h3>parseInt() Function</h3>
+<p>This function parses a string and returns an integer.Remamber, only the first number in the string is returned!</p>
+<p id="parseInt">var a = '623'</p>
+<button onclick="parseIt()">ParseInt</button>
+<pre><code>&lt;p id="parseInt">var a = '623'&lt;/p>
+&lt;button onclick="parseIt()">ParseInt&lt;/button>
+&lt;script>
+    function parseIt() {
+        var string = '623';
+        var strToInt = parseInt(string);
+        document.getElementById("parseInt").innerHTML = strToInt;
+    }
+&lt;/script>
+</code></pre>
+<hr>
+<h3>Array push() Method</h3>
+<p>This method is used in order to add an element to the end of an array.</p>
+<p id="push">Banana,Orange,Apple,Mango</p>
+<button onclick="pushFunction()">Push</button>
+<pre><code>&lt;p id="push">Banana,Orange,Apple,Mango&lt;/p>
+&lt;button onclick="pushFunction()">Push&lt;/button>
+&lt;script>
+    function pushFunction() {
+        var fruits = ['Banana', 'Orange', 'Apple', 'Mango'];
+        document.getElementById("push").innerHTML = fruits;
+        fruits.push("Kiwi");
+        document.getElementById("push").innerHTML = fruits;
+    }
+&lt;/script>
+</code></pre>
+<hr>
+<h3>Array unshift() Method</h3>
+<p id="unshift">Banana,Orange,Apple,Mango</p>
+<button onclick="unShiftFunction()">Unshift</button>
+<pre><code>&lt;p id="unshift">Banana,Orange,Apple,Mango&lt;/p>
+&lt;button onclick="unShiftFunction()">Unshift&lt;/button>
+&lt;script>
+function unShiftFunction() {
+    var fruits = ['Banana', 'Orange', 'Apple', 'Mango'];
+    document.getElementById("unshift").innerHTML = fruits;
+    fruits.unshift('Kiwi', 'Durian');
+    document.getElementById("unshift").innerHTML = fruits;
+&lt;/script>
+</code></pre>
+<hr>
+<h3>Methd split()</h3>
 <script>
     function splitFunction() {
         var str = 'ABCDEFG';
@@ -83,6 +145,34 @@
         var languages = ['Python', 'Java', 'C#', 'Ruby', 'PHP'];
         var join_lang = languages.join();
         document.getElementById("join").innerHTML = join_lang;
+    }
+
+    function toStringg() {
+        var number = 13;
+        var numString = number.toString();
+        document.getElementById("toString").innerHTML = numString;
+    }
+
+    function parseIt() {
+        var string = '623';
+        var strToInt = parseInt(string);
+        document.getElementById("parseInt").innerHTML = strToInt;
+    }
+
+
+    function pushFunction() {
+        var fruits = ['Banana', 'Orange', 'Apple', 'Mango'];
+        document.getElementById("push").innerHTML = fruits;
+        fruits.push("Kiwi");
+        document.getElementById("push").innerHTML = fruits;
+    }
+
+    function unShiftFunction() {
+        var fruits = ['Banana', 'Orange', 'Apple', 'Mango'];
+        document.getElementById("unshift").innerHTML = fruits;
+        fruits.unshift('Kiwi', 'Durian');
+        document.getElementById("unshift").innerHTML = fruits;
+
     }
 </script>
 {% endblock content %}

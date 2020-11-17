@@ -1,0 +1,33 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<h1>Code Wars exercises - JavaScript</h1>
+<h3>Convert number to reversed array of digits</h3>
+<p>Given a random non-negative number, you have to return the digits of this number within an array in reverse order.</p>
+<p>Example: 348597 => [7,9,5,8,4,3]</p>
+Number : <input type="number" id="myNumber">
+<button onclick="reverseFunction()" class="buttons">Reverse It</button>
+<button onclick="loadDoc()" class="buttons">Show code</button>
+<p id="demo"></p>
+<div id="button_div"></div>
+<script>
+    function reverseFunction() {
+        var x = document.getElementById('myNumber').value;
+        x = x.toString();
+        x = Array.from(x);
+        x = x.map(el => parseInt(el));
+        x = x.reverse()
+        document.getElementById("demo").innerHTML = x;
+    }
+
+    function loadDoc() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("button_div").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", "/codewars_exercises_done", true);
+        xhttp.send();
+    }
+</script>
+
+{% endblock content %}
