@@ -108,6 +108,7 @@
 </code></pre>
 <hr>
 <h3>Array unshift() Method</h3>
+<p>This method adds new items to the beginning of an arry, and returns the new length.</p>
 <p id="unshift">Banana,Orange,Apple,Mango</p>
 <button onclick="unShiftFunction()">Unshift</button>
 <pre><code>&lt;p id="unshift">Banana,Orange,Apple,Mango&lt;/p>
@@ -121,7 +122,39 @@ function unShiftFunction() {
 &lt;/script>
 </code></pre>
 <hr>
-<h3>Methd split()</h3>
+<h3>Array indexOf() Method</h3>
+<p>This method searches the array for the specified item, and returns its position. If the item is present more than once, the indexOf method returns the position of the first occurance. However, it will return -1 it the item is not found.</p>
+<p>
+    <bold>Tip:</bold> if you want to search from end to start, use the <code>lastIndexOf()</code> method.</p>
+<p id="indexOf">'Banana','Orange','Apple','Mango'</p>
+<button onclick="indexOfFunction()">IndexOf</button>
+<pre><code>&lt;p id="indexOf">'Banana','Orange','Apple','Mango'&lt;/p>
+&lt;button onclick="indexOfFunction()">IndexOf&lt;/button>
+&lt;script>
+    function indexOfFunction() {
+        var fruits = ["Banana", "Orange", "Apple", "Mango"];
+        var fruitIndex = fruits.indexOf('Apple');
+        document.getElementById("indexOf").innerHTML = fruitIndex;
+    }
+&lt;/script>s
+</code></pre>
+<hr>
+<h3>String repeat() Method</h3>
+<p>This method returns a new string ith a specified number of copies of the string it was called on.</p>
+<p id="repeat">Let's repeat this sentence! </p>
+<button onclick="repeatFunction()">Repeat</button>
+<pre><code>&lt;p id="repeat">Let's repeat this sentence! &lt;/p>
+&lt;button onclick="repeatFunction()">Repeat&lt;/button>
+&lt;script>
+    function repeatFunction() {
+        var sentence = "Let's repeat this sentence!";
+        var repeat_sen = sentence.repeat(4);
+        document.getElementById("repeat").innerHTML = repeat_sen;
+    }
+&lt;/script>
+</code></pre>
+<hr>
+<h3>Array map() Method</h3>
 <script>
     function splitFunction() {
         var str = 'ABCDEFG';
@@ -172,7 +205,18 @@ function unShiftFunction() {
         document.getElementById("unshift").innerHTML = fruits;
         fruits.unshift('Kiwi', 'Durian');
         document.getElementById("unshift").innerHTML = fruits;
+    }
 
+    function indexOfFunction() {
+        var fruits = ["Banana", "Orange", "Apple", "Mango"];
+        var fruitIndex = fruits.indexOf('Apple');
+        document.getElementById("indexOf").innerHTML = fruitIndex;
+    }
+
+    function repeatFunction() {
+        var sentence = "Let's repeat this sentence!";
+        var repeat_sen = sentence.repeat(4);
+        document.getElementById("repeat").innerHTML = repeat_sen;
     }
 </script>
 {% endblock content %}

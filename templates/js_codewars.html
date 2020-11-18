@@ -5,9 +5,43 @@
 <p>Example: 348597 => [7,9,5,8,4,3]</p>
 Number : <input type="number" id="myNumber">
 <button onclick="reverseFunction()" class="buttons">Reverse It</button>
-<button onclick="loadDoc()" class="buttons">Show code</button>
+<button onclick="showCode()" class="buttons">Show code</button>
 <p id="demo"></p>
-<div id="button_div"></div>
+<div id="ex_1" style="display: none;">
+    <pre><code>function digitize(n) {
+var n = n.toString();
+n = Array.from(n);
+n = n.map(el=>parseInt(el));
+n = n.reverse();
+return n;
+};    
+</code></pre>
+</div>
+<hr>
+<h3>Vowel Count</h3>
+<p>Return the number of vowels in the given string. We will consider only: a, e, i, o, u.</p>
+<p>I decided to put this exercise here as in order to solve it, you can use a loop within a loop, which is handy when comparing.</p>
+String:<input type="text" id="myString">
+<button onclick="getCountFunction()" class="buttons">Count It</button>
+<button onclick="showCode2()" class="buttons">Show code</button>
+<p id="demo2"></p>
+<div id="ex_2" style="display: none;">
+    <pre><code>function getCount(str) {
+var vowelsCount = 0;
+var vowels = 'aeiou';
+vowels = vowels.split('');
+str = str.split('');
+for (i=0;i&lt;str.length;i++){
+  for (j=0;j&lt;vowels.length;j++){
+    if (str[i] === vowels[j]){
+      vowelsCount += 1;
+    }
+  }
+};
+return vowelsCount
+};
+    </code></pre>
+</div>
 <script>
     function reverseFunction() {
         var x = document.getElementById('myNumber').value;
@@ -18,15 +52,39 @@ Number : <input type="number" id="myNumber">
         document.getElementById("demo").innerHTML = x;
     }
 
-    function loadDoc() {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("button_div").innerHTML = this.responseText;
+    function showCode() {
+        var x = document.getElementById("ex_1");
+        if (x.style.display === 'none') {
+            x.style.display = 'block';
+        } else {
+            x.style.display = 'none';
+        }
+    }
+
+    function getCountFunction() {
+        var x = document.getElementById("myString").value;
+        x = x.toLowerCase();
+        var vowelsCount = 0;
+        var vowels = "aeiou";
+        vowels = vowels.split('');
+        x = x.split('');
+        for (i = 0; i < x.length; i++) {
+            for (j = 0; j < vowels.length; j++) {
+                if (x[i] === vowels[j]) {
+                    vowelsCount += 1
+                }
             }
-        };
-        xhttp.open("GET", "/codewars_exercises_done", true);
-        xhttp.send();
+        }
+        document.getElementById("demo2").innerHTML = vowelsCount;
+    }
+
+    function showCode2() {
+        var x = document.getElementById("ex_2");
+        if (x.style.display === 'none') {
+            x.style.display = 'block';
+        } else {
+            x.style.display = 'none';
+        }
     }
 </script>
 
