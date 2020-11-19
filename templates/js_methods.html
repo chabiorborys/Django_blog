@@ -155,6 +155,35 @@ function unShiftFunction() {
 </code></pre>
 <hr>
 <h3>Array map() Method</h3>
+<p>This method works on arrays and creates a new array with the results of calling a function for every array element.This method does not change the original array</p>
+<p id="map">['1','89','-123','5']</p>
+<button onclick="mapFunction()">Map</button>
+<pre><code>&lt;p id="map">['1','89','-123','5']&lt;/p>
+&lt;button onclick="mapFunction()">Map&lt;/button>
+&lt;script>
+function mapFunction() {
+    var array = ['1', '89', '-123', '5'];
+    var mapArray = array.map(Number);
+    document.getElementById("map").innerHTML = mapArray;
+}
+&lt;/script>
+</code></pre>
+<hr>
+<h3>Function apply() Method</h3>
+<p>This method allows you to write a method that can be used on different objects. The <code>apply()</code> method takes arguments as an array.</p>
+<p>JS arrays don't have a max() method, therefore you can apply th e<code>Math.max()</code> method instead.</p>
+<p id="apply_max">1,2,3.4</p>
+<button onclick="applyFunction()">Apply</button>
+<pre><code>&lt;p id="apply_max">1,2,3.4&lt;/p>
+&lt;button onclick="applyFunction()">Apply&lt;/button>
+&lt;script>
+function applyFunction() {
+    var x = [1, 2, 3, 4];
+    var findMax = Math.max.apply(0, x);
+    document.getElementById("apply_max").innerHTML = findMax;
+}
+&lt;/script>
+</code></pre>
 <script>
     function splitFunction() {
         var str = 'ABCDEFG';
@@ -217,6 +246,18 @@ function unShiftFunction() {
         var sentence = "Let's repeat this sentence!";
         var repeat_sen = sentence.repeat(4);
         document.getElementById("repeat").innerHTML = repeat_sen;
+    }
+
+    function mapFunction() {
+        var array = ['1', '89', '-123', '5'];
+        var mapArray = array.map(Number);
+        document.getElementById("map").innerHTML = mapArray;
+    }
+
+    function applyFunction() {
+        var x = [1, 2, 3, 4];
+        var findMax = Math.max.apply(0, x);
+        document.getElementById("apply_max").innerHTML = findMax;
     }
 </script>
 {% endblock content %}
