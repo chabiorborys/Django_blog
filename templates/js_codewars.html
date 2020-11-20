@@ -42,6 +42,38 @@ return vowelsCount
 };
     </code></pre>
 </div>
+<hr>
+<h3>Disemvowel Trolls</h3>
+<p>Your task is to write a function that takes a string and return a new string with all vowels removed.</p>
+<p>Here we will use the <code>replace()</code> method.</p>
+String:<input type="text" id="myString2">
+<button onclick="replaceFunction()" class="buttons">Replace</button>
+<button onclick="showCode3()" class="buttons">Show code</button>
+<p id="demo3"></p>
+<div id="ex_3" style="display: none;">
+    <pre><code>function disemvowel(str) {
+    return str.replace(/[aeiou]/gi,"");
+}
+</code></pre>
+</div>
+<h3>Shortes Word</h3>
+<p>Given a string of words, return the length of the shortest wrod(s).</p>
+String:<input type="text" id="myString3">
+<button onclick="sortFunction()" class="buttons">Replace</button>
+<button onclick="showCode4()" class="buttons">Show code</button>
+<p id="demo4"></p>
+<div id="ex_4" style="display: none;">
+    <pre><code>function findShort(s){
+s = s.split(' ').sort()
+var len = []
+for (i=0;i&lt;s.length;i++){
+  len[i]=s[i].length
+}
+len = len.sort(function(a,b){return a-b})
+return Math.min.apply(0,len)
+}
+</code></pre>
+</div>
 <script>
     function reverseFunction() {
         var x = document.getElementById('myNumber').value;
@@ -80,6 +112,44 @@ return vowelsCount
 
     function showCode2() {
         var x = document.getElementById("ex_2");
+        if (x.style.display === 'none') {
+            x.style.display = 'block';
+        } else {
+            x.style.display = 'none';
+        }
+    }
+
+    function replaceFunction() {
+        var x = document.getElementById("myString2").value;
+        x = x.replace(/[aeiou]/gi, "");
+        document.getElementById("demo3").innerHTML = x;
+    }
+
+    function showCode3() {
+        var x = document.getElementById("ex_3");
+        if (x.style.display === 'none') {
+            x.style.display = 'block';
+        } else {
+            x.style.display = 'none';
+        }
+    }
+
+    function sortFunction() {
+        var len = [];
+        var x = document.getElementById("myString3").value;
+        x = x.split(' ').sort();
+        for (i = 0; i < x.length; i++) {
+            len[i] = x[i].length
+        }
+        len = len.sort(function(a, b) {
+            return a - b
+        })
+        len = Math.min.apply(0, len)
+        document.getElementById("demo4").innerHTML = len
+    }
+
+    function showCode4() {
+        var x = document.getElementById("ex_4");
         if (x.style.display === 'none') {
             x.style.display = 'block';
         } else {
