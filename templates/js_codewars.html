@@ -74,6 +74,22 @@ return Math.min.apply(0,len)
 }
 </code></pre>
 </div>
+<h3>Two to One</h3>
+<p>Take 2 strings s1 and s2 including only letters from ato z. Return a new sorted string, the longest possible, containing distinct letters, each taken only once - coming from s1 or s2.
+</p>
+<p>This exercise shows you how to get rid of duplicates.</p>
+String 1:<input type="text" id="myString4"> String 2:<input type="text" id="myString5">
+<button onclick="setFunction()" class="buttons">Set</button>
+<button onclick="showCode5()" class="buttons">Show code</button>
+<p id="demo5"></p>
+<div id="ex_5" style="display: none;">
+    <pre><code>function longest(s1, s2) {
+    s3 = s1.concat(s2)
+    s3 = new Set(s3)
+    return Array.from(s3).sort().join('')
+}
+</code></pre>
+</div>
 <script>
     function reverseFunction() {
         var x = document.getElementById('myNumber').value;
@@ -150,6 +166,23 @@ return Math.min.apply(0,len)
 
     function showCode4() {
         var x = document.getElementById("ex_4");
+        if (x.style.display === 'none') {
+            x.style.display = 'block';
+        } else {
+            x.style.display = 'none';
+        }
+    }
+
+    function setFunction() {
+        var s1 = document.getElementById('myString4').value;
+        var s2 = document.getElementById('myString5').value;
+        var s3 = s1.concat(s2);
+        s3 = new Set(s3);
+        document.getElementById("demo5").innerHTML = Array.from(s3).sort().join('');
+    }
+
+    function showCode5() {
+        var x = document.getElementById("ex_5");
         if (x.style.display === 'none') {
             x.style.display = 'block';
         } else {
