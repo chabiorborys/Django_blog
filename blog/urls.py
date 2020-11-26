@@ -11,6 +11,8 @@ urlpatterns = [
     path('tech/', views.BlogPageView.as_view()),
     path('about/', views.AboutPageView.as_view()),
     path('contact/', views.ContactPageView.as_view()),
+    path('register/', views.RegisterPageView.as_view()),
+    path('login/', views.LoginPageView.as_view()),
     path('github/', views.GithubPageView.as_view()),
     path('digital_ocean/', views.DigitalOceanPageView.as_view()),
     path('python/', views.PythonPageView.as_view()),

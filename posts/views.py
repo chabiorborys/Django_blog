@@ -2,7 +2,10 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
 from django.core.mail import send_mail
-from .forms import ContactForm
+from .forms import ContactForm, RegisterForm, LoginForm
+from django.contrib.auth.models import User
+from django.views.generic.base import HttpResponseRedirect
+from django.contrib.auth import authenticate, login
 
 
 class LandingPageView(View):
@@ -39,6 +42,48 @@ class ContactPageView(View):
                         return HttpResponse('Thanks for sending an e-mail!')
             return render(request, 'contact.html', {'form': form})
     
+class RegisterPageView(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            return redirect('/')
+        form = RegisterForm()
+        return render(request, 'register.html', {'form': form})   
+
+    def post(self, request):
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            re_password = form.cleaned_data['re_password']
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            email = form.cleaned_data['email']
+            new_user = User(username=username, first_name=first_name, last_name=last_name, email=email)
+            new_user.set_password(password)
+            new_user.save()
+            return redirect('/')
+        return render(request, 'register.html', {'form': form})
+
+class LoginPageView(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            return redirect('/')
+        form = LoginForm()
+        return render(request, 'login.html', {'form': form})
+    
+    def post(self, request):
+        form = LoginForm(request.POST)
+        if form.is_valid:
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                # if user exists, login() function will keep him logged during session
+                login(request, user)
+                return redirect('/') 
+            else:
+                return redirect('/login')
+
 class CreatingScriptsPageView(View):
     def get(self, request):
         context = {}
