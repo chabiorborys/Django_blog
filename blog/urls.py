@@ -13,6 +13,8 @@ urlpatterns = [
     path('contact/', views.ContactPageView.as_view()),
     path('register/', views.RegisterPageView.as_view()),
     path('login/', views.LoginPageView.as_view()),
+    path('new_video/', views.UploadVideoPageView.as_view()),
+    path('video/<int:id>', views.VideoPageView.as_view()),
     path('github/', views.GithubPageView.as_view()),
     path('digital_ocean/', views.DigitalOceanPageView.as_view()),
     path('python/', views.PythonPageView.as_view()),

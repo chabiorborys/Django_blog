@@ -35,3 +35,5 @@ class NewVideoForm(forms.Form):
     title = forms.CharField(label='Title', max_length=30)
     description = forms.CharField(label='Description', max_length=200)
     file = forms.FileField()
+
+    

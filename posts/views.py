@@ -2,11 +2,12 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
 from django.core.mail import send_mail
-from .forms import ContactForm, RegisterForm, LoginForm
+from .forms import ContactForm, RegisterForm, LoginForm, NewVideoForm
 from django.contrib.auth.models import User
 from django.views.generic.base import HttpResponseRedirect
 from django.contrib.auth import authenticate, login
-
+from .models import Video, Comment
+import string, random
 
 class LandingPageView(View):
     def get(self, request):
@@ -25,22 +26,22 @@ class AboutPageView(View):
 
 class ContactPageView(View):
     def get(self, request):
-            form = ContactForm()
-            return render(request, 'contact.html', {'form':form})
+        form = ContactForm()
+        return render(request, 'contact.html', {'form':form})
             
     def post(self, request):
-            form = ContactForm(request.POST)
-            if form.is_valid():
-                        name = form.cleaned_data['name']
-                        last_name = form.cleaned_data['last_name']
-                        subject = form.cleaned_data['subject']
-                        message = form.cleaned_data['message']
-                        sender = form.cleaned_data['sender']
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            last_name = form.cleaned_data['last_name']
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+            sender = form.cleaned_data['sender']
 
-                        message = '{0} has sent you a new message:\n\n{1}'.format(name, form.cleaned_data['message'])
-                        send_mail('New Enquiry', message, sender, ['chabiorborys@gmail.com'])
-                        return HttpResponse('Thanks for sending an e-mail!')
-            return render(request, 'contact.html', {'form': form})
+            message = '{0} has sent you a new message:\n\n{1}'.format(name, form.cleaned_data['message'])
+            send_mail('New Enquiry', message, sender, ['chabiorborys@gmail.com'])
+            return HttpResponse('Thanks for sending an e-mail!')
+        return render(request, 'contact.html', {'form': form})
     
 class RegisterPageView(View):
     def get(self, request):
@@ -73,7 +74,7 @@ class LoginPageView(View):
     
     def post(self, request):
         form = LoginForm(request.POST)
-        if form.is_valid:
+        if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user = authenticate(request, username=username, password=password)
@@ -83,6 +84,38 @@ class LoginPageView(View):
                 return redirect('/') 
             else:
                 return redirect('/login')
+
+class UploadVideoPageView(View):
+    def get(self, request):  
+        form = NewVideoForm()
+        most_recent_videos = Video.objects.order_by('-datetime')[:10]
+        return render(request, 'new_video.html', {'form': form, 'most_recent_videos':most_recent_videos})
+
+    def post(self, request):
+        form = NewVideoForm(request.POST, request.FILES)
+        if form.is_valid():
+            # create new Video Entry
+            title = form.cleaned_data['title']
+            description = form.cleaned_data['description']
+            file = form.cleaned_data['file']
+            random_char = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
+            path = random_char+file.name
+            new_video = Video(title=title,
+                              description=description, 
+                              user=request.user,
+                              path=path)
+            new_video.save()
+            # redirect to created view template of the video
+            return redirect('/new_video/{}'.format(new_video.pk))
+        else:
+            return HttpResponse('Your form is not valid. Try again.')
+        return render(request, 'new_video.html', {'form': form})
+
+class VideoPageView(View):
+    def get(self, request, id):
+        context = {}
+        return render(request, 'video.html', {})
+
 
 class CreatingScriptsPageView(View):
     def get(self, request):

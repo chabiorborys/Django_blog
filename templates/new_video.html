@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<h1>Upload Video</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %} {{ form.as_p }}
+    <input type="submit" value="Upload Video">
+</form>
+<h2>Most Recent Videos</h2>
+{% for video in most_recent_videos %}
+<h4>{{ video.title }}</h4>
+<h5>Uploaded by: {{video.user}} on {{ video.datetime }}</h5>
+<h5>{{ video.description }}</h5>
+<p><a href="/video/{{ video.id }}">Watch Video</a></p>
+{% endfor %}
+</ul>
+{% endblock content %}
