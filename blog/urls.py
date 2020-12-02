@@ -13,8 +13,8 @@ urlpatterns = [
     path('contact/', views.ContactPageView.as_view()),
     path('register/', views.RegisterPageView.as_view()),
     path('login/', views.LoginPageView.as_view()),
-    path('new_video/', views.UploadVideoPageView.as_view()),
-    path('video/<int:id>', views.VideoPageView.as_view()),
+    path('logout/', views.LogoutPageView.as_view()),
+    path('comment/', views.CommentView.as_view()),
     path('github/', views.GithubPageView.as_view()),
     path('digital_ocean/', views.DigitalOceanPageView.as_view()),
     path('python/', views.PythonPageView.as_view()),
@@ -38,7 +38,9 @@ urlpatterns = [
     path('secure_shell1/', views.SecureShell1PageView.as_view()),
     path('secure_shell2/', views.SecureShell2PageView.as_view()),
     path('js_methods/', views.JSMethodsView.as_view()),
-]
+    path('videos/', views.ShowVideosView.as_view()),
+    path('all_videos', views.ListOfVideosView.as_view()),
+] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
 
 
 if settings.DEBUG:

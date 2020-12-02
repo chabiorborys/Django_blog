@@ -1,5 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from .models import VideoModel
 
 class ContactForm(forms.Form):
     name = forms.CharField(initial='Your name', required=True)
@@ -36,4 +37,11 @@ class NewVideoForm(forms.Form):
     description = forms.CharField(label='Description', max_length=200)
     file = forms.FileField()
 
-    
+class CommentForm(forms.Form):
+    text = forms.CharField(label='text', max_length=300)
+    video = forms.HiddenInput()
+
+class VideoForm(forms.ModelForm):
+    class Meta:
+        model = VideoModel
+        fields = ['name', 'videofile']

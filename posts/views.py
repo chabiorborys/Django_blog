@@ -2,12 +2,15 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
 from django.core.mail import send_mail
-from .forms import ContactForm, RegisterForm, LoginForm, NewVideoForm
+from .forms import ContactForm, RegisterForm, LoginForm, NewVideoForm, CommentForm
 from django.contrib.auth.models import User
 from django.views.generic.base import HttpResponseRedirect
-from django.contrib.auth import authenticate, login
-from .models import Video, Comment
+from django.contrib.auth import authenticate, login, logout
+from .models import Video, Comment, VideoModel
+from .forms import VideoForm
 import string, random
+from wsgiref.util import FileWrapper
+import os
 
 class LandingPageView(View):
     def get(self, request):
@@ -85,36 +88,53 @@ class LoginPageView(View):
             else:
                 return redirect('/login')
 
-class UploadVideoPageView(View):
+class LogoutPageView(View):
+    def get(self, request):
+        logout(request)
+        return redirect ('/')
+
+class ShowVideosView(View):
     def get(self, request):  
-        form = NewVideoForm()
-        most_recent_videos = Video.objects.order_by('-datetime')[:10]
-        return render(request, 'new_video.html', {'form': form, 'most_recent_videos':most_recent_videos})
+        form = VideoForm()
+        lastvideo = VideoModel.objects.last()
+        videofile = lastvideo.videofile
+        return render(request, 'videos.html', {'videofile': videofile, 'form': form})
+
 
     def post(self, request):
-        form = NewVideoForm(request.POST, request.FILES)
+        form = VideoForm(request.POST or None, request.FILES or None) 
+        lastvideo = VideoModel.objects.last()
+        videofile = lastvideo.videofile
+        form = VideoForm(request.POST or None, request.FILES or None)
         if form.is_valid():
-            # create new Video Entry
-            title = form.cleaned_data['title']
-            description = form.cleaned_data['description']
-            file = form.cleaned_data['file']
-            random_char = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
-            path = random_char+file.name
-            new_video = Video(title=title,
-                              description=description, 
-                              user=request.user,
-                              path=path)
+            name = form.cleaned_data['name']
+            videofile = form.cleaned_data['videofile']
+            new_video = VideoModel(name=name, videofile=videofile)
             new_video.save()
-            # redirect to created view template of the video
-            return redirect('/new_video/{}'.format(new_video.pk))
+
+        context = {'videofile': videofile, 'form': form}
+        return render(request, 'videos.html', context)
+
+class ListOfVideosView(View):
+    def get(self, request):
+        all_videos = VideoModel.objects.all()
+        context = {'all_videos': all_videos}
+        return render(request, 'all_videos.html', context)
+
+class CommentView(View):
+    def post(view, request):
+        form = CommentForm()
+        if form.is_valid():
+            text = form.cleaned_data['text']
+            video_id = form.cleaned_data['video']
+            video = Video.objects.get(id=video_id)
+
+            new_comment = Comment(text=text, user=request.user, video=video)
+            new_comment.save()
+            return redirect('/new_video/{}'.format(str(video_id)))
         else:
             return HttpResponse('Your form is not valid. Try again.')
-        return render(request, 'new_video.html', {'form': form})
-
-class VideoPageView(View):
-    def get(self, request, id):
-        context = {}
-        return render(request, 'video.html', {})
+        return render(request, 'comment.html', {'form': form})
 
 
 class CreatingScriptsPageView(View):
@@ -226,3 +246,4 @@ class SecureShell2PageView(View):
     def get(self, request):
         context = {}
         return render(request, 'secure_shell2.html', context)
+

@@ -1,0 +1,6 @@
+{% extends 'base.html' %} {% load static %} {% block content %} {% for video in all_videos %}
+<p>Video title :{{video.name}}</p>
+<video width='400' height="300" controls>
+    <source src='{{ MEDIA_URL }}{{ video.videofile }}' type='video/mp4'>
+    Your browser does not support the video tag.
+</video> {% endfor %} {% endblock content %}
