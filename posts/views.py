@@ -2,15 +2,12 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
 from django.core.mail import send_mail
-from .forms import ContactForm, RegisterForm, LoginForm, NewVideoForm, CommentForm
+from .forms import ContactForm, RegisterForm, LoginForm, NewVideoForm, CommentForm, VideoForm
 from django.contrib.auth.models import User
 from django.views.generic.base import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from .models import Video, Comment, VideoModel
-from .forms import VideoForm
-import string, random
-from wsgiref.util import FileWrapper
-import os
+from django.core.paginator import Paginator
 
 class LandingPageView(View):
     def get(self, request):
@@ -93,12 +90,12 @@ class LogoutPageView(View):
         logout(request)
         return redirect ('/')
 
-class ShowVideosView(View):
+class UploadVideoView(View):
     def get(self, request):  
         form = VideoForm()
         lastvideo = VideoModel.objects.last()
         videofile = lastvideo.videofile
-        return render(request, 'videos.html', {'videofile': videofile, 'form': form})
+        return render(request, 'upload_video.html', {'videofile': videofile, 'form': form})
 
 
     def post(self, request):
@@ -113,28 +110,22 @@ class ShowVideosView(View):
             new_video.save()
 
         context = {'videofile': videofile, 'form': form}
-        return render(request, 'videos.html', context)
+        return render(request, 'upload_video.html', context)
 
 class ListOfVideosView(View):
     def get(self, request):
         all_videos = VideoModel.objects.all()
-        context = {'all_videos': all_videos}
+        all_videos_paginator = Paginator(all_videos, 5)
+        page_num = request.GET.get('page')
+        page = all_videos_paginator.get_page(page_num) 
+        context = {'all_videos': all_videos, 'page':page, 'count':all_videos_paginator.count}
         return render(request, 'all_videos.html', context)
 
-class CommentView(View):
-    def post(view, request):
-        form = CommentForm()
-        if form.is_valid():
-            text = form.cleaned_data['text']
-            video_id = form.cleaned_data['video']
-            video = Video.objects.get(id=video_id)
-
-            new_comment = Comment(text=text, user=request.user, video=video)
-            new_comment.save()
-            return redirect('/new_video/{}'.format(str(video_id)))
-        else:
-            return HttpResponse('Your form is not valid. Try again.')
-        return render(request, 'comment.html', {'form': form})
+class VideoView(View):
+    def get(self, request, id):
+        video_by_id = VideoModel.objects.get(id=id)
+        context = {'video_by_id': video_by_id}
+        return render(request, 'video.html', context)
 
 
 class CreatingScriptsPageView(View):

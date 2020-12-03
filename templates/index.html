@@ -1,8 +1,6 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 
 <h1>Hi there! My goal is to create a website from scratch and take notes of my journey.</h1>
-<button id="date_button">Date</button>
-<p id="display_date"></p>
 <img src="https://media.giphy.com/media/11SIBu3s72Co8w/giphy.gif" class="image">
 <div class="container totoro-container">
     dsdadsadda<img id="totoro" src="https://media.giphy.com/media/omHPYZttAVAAw/giphy.gif">
@@ -24,17 +22,5 @@
         };
     };
     walkTotoro();
-
-    var date = document.getElementById("date_button");
-    date.addEventListener("mouseover", showDate);
-    date.addEventListener("mouseout", hideDate);
-
-    function showDate() {
-        document.getElementById("display_date").innerHTML = Date();
-    }
-
-    function hideDate() {
-        document.getElementById("display_date").innerHTML = null;
-    }
 </script>
 {% endblock content %}
