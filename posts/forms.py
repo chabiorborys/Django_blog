@@ -28,8 +28,6 @@ class RegisterForm(forms.Form):
     def clean(self):
         cleaned_data = super().clean()
         if not self.errors:
-            if cleaned_data['username'] is not None:
-                raise ValidationError("User already exists.")
             if cleaned_data['password'] !=cleaned_data['re_password']:
                 raise ValidationError("Passwords are not the same.")
         return self.cleaned_data
