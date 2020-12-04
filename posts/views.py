@@ -93,6 +93,7 @@ class LogoutPageView(View):
 class UploadVideoView(View):
     def get(self, request):  
         form = VideoForm()
+        user = User.objects.all()
         lastvideo = VideoModel.objects.last()
         videofile = lastvideo.videofile
         return render(request, 'upload_video.html', {'videofile': videofile, 'form': form})
@@ -108,9 +109,10 @@ class UploadVideoView(View):
             videofile = form.cleaned_data['videofile']
             new_video = VideoModel(name=name, videofile=videofile)
             new_video.save()
-
-        context = {'videofile': videofile, 'form': form}
-        return render(request, 'upload_video.html', context)
+            return redirect('/video/{}'.format(new_video.id))
+        else:
+            context = {'videofile': videofile, 'form': form}
+            return render(request, 'upload_video.html', context)
 
 class ListOfVideosView(View):
     def get(self, request):

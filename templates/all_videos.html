@@ -1,8 +1,15 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 <h2>Page Number: {{ page.number }}</h2>
+<div class="page-links">
+    {% if page.has_previous %}
+    <a href="?page={{ page.previous_page_number }}">Previous Page</a> {% endif %} {% if page.has_next %}
+    <a href="?page={{ page.next_page_number }}">Next Page</a> {% endif %}
+</div>
 {% for video in page.object_list %}
 <p>Video title :{{video.name}}</p>
 <a href="/video/{{ video.id }}">Video Content</a>
+<br><br>
+<hr>
 <video width='400' height="300" controls>
     <source src='{{ MEDIA_URL }}{{ video.videofile }}' type='video/mp4'>
     Your browser does not support the video tag.
