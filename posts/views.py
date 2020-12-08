@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
@@ -59,10 +60,15 @@ class RegisterPageView(View):
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
             email = form.cleaned_data['email']
-            new_user = User(username=username, first_name=first_name, last_name=last_name, email=email)
-            new_user.set_password(password)
-            new_user.save()
-            return redirect('/')
+            try:
+                user = User.objects.get(username=form.cleaned_data['username'])
+                context= {'form': form, 'error':'The username you entered has already been taken. Please try another username.'}
+                return render(request, 'register.html', context)
+            except User.DoesNotExist:
+                new_user = User(username=username, first_name=first_name, last_name=last_name, email=email)
+                new_user.set_password(password)
+                new_user.save()
+                return redirect('/')
         return render(request, 'register.html', {'form': form})
 
 class LoginPageView(View):
@@ -126,10 +132,16 @@ class ListOfVideosView(View):
 class VideoView(View):
     def get(self, request, id):
         video_by_id = VideoModel.objects.get(id=id)
-        context = {'video_by_id': video_by_id}
+        # selecting videofile to show its size
+        video = video_by_id.videofile
+        full_video_path = "media/" + str(video)
+        video_size = os.path.getsize(full_video_path) 
+        if video_size < 4194304000:
+            video_size = video_size / 1000000
+        context = {'video_by_id': video_by_id,
+                    'video_size': video_size}
         return render(request, 'video.html', context)
-
-
+    
 class CreatingScriptsPageView(View):
     def get(self, request):
         context = {}

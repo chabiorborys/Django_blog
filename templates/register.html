@@ -4,5 +4,7 @@
 <form method="POST">
     {% csrf_token %} {{ form.as_p }}
     <input type="submit" value="Create Account">
+    <br>
+    <h4 style="color: red;">{{ error }}</h3>
 </form>
 {% endblock content %}

@@ -1,4 +1,5 @@
 from django.db import models
+from .validators import validate_file_size
 
 class Video(models.Model):
     title = models.CharField(max_length=30)
@@ -17,7 +18,7 @@ class Comment(models.Model):
 
 class VideoModel(models.Model):
     name = models.CharField(max_length=500)
-    videofile = models.FileField(upload_to='videos/', null=True, verbose_name="")
+    videofile = models.FileField(upload_to='videos/', null=True, verbose_name="", validators=[validate_file_size])
 
     def __str__(self):
         return self.name + ": " + str(self.videofile)
