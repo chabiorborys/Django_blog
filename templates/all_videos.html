@@ -2,7 +2,7 @@
 <h2>Page Number: {{ page.number }}</h2>
 <div class="page-links">
     {% if page.has_previous %}
-    <a href="?page={{ page.previous_page_number }}">Previous Page</a> {% endif %} {% if page.has_next %}
+    <a href="?page={{ page.previous_page_number }}">Previous Page</a> {% endif %} | {% if page.has_next %}
     <a href="?page={{ page.next_page_number }}">Next Page</a> {% endif %}
 </div>
 {% for video in page.object_list %}
@@ -16,7 +16,7 @@
 </video> {% endfor %}
 <div class="page-links">
     {% if page.has_previous %}
-    <a href="?page={{ page.previous_page_number }}">Previous Page</a> {% endif %} {% if page.has_next %}
+    <a href="?page={{ page.previous_page_number }}">Previous Page</a> {% endif %} | {% if page.has_next %}
     <a href="?page={{ page.next_page_number }}">Next Page</a> {% endif %}
 </div>
 {% endblock content %}

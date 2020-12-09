@@ -9,6 +9,7 @@ from django.views.generic.base import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from .models import Video, Comment, VideoModel
 from django.core.paginator import Paginator
+from django.core.mail import send_mail
 
 class LandingPageView(View):
     def get(self, request):
@@ -24,26 +25,26 @@ class AboutPageView(View):
     def get(self, request):
         context = {}
         return render(request, 'about.html', context)
-
+    
 class ContactPageView(View):
     def get(self, request):
         form = ContactForm()
-        return render(request, 'contact.html', {'form':form})
-            
-    def post(self, request):
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data['name']
-            last_name = form.cleaned_data['last_name']
-            subject = form.cleaned_data['subject']
-            message = form.cleaned_data['message']
-            sender = form.cleaned_data['sender']
-
-            message = '{0} has sent you a new message:\n\n{1}'.format(name, form.cleaned_data['message'])
-            send_mail('New Enquiry', message, sender, ['chabiorborys@gmail.com'])
-            return HttpResponse('Thanks for sending an e-mail!')
         return render(request, 'contact.html', {'form': form})
-    
+
+    def post(self, request):
+        form = ContactForm(request.POST or None)
+        if form.is_valid():
+            name = form.cleaned_data.get("name")
+            email = form.cleaned_data.get("email")
+            comment = form.cleaned_data.get("comment")
+            context = {'form': form}
+            comment = name + " with the email, " + email + ", sent the following message:\n\n" + comment;
+            send_mail('The title of this post', comment, 'borskiborys@gmail.com', ['chabiorborys@gmail.com'])            
+            return render(request, 'confirmation.html', {'confirmation': 'Thank you for sending an e-mail!'})
+        else:
+            context = {'form': form}
+            return render(request,'contact.html', context)
+
 class RegisterPageView(View):
     def get(self, request):
         if request.user.is_authenticated:
@@ -135,7 +136,8 @@ class VideoView(View):
         # selecting videofile to show its size
         video = video_by_id.videofile
         full_video_path = "media/" + str(video)
-        video_size = os.path.getsize(full_video_path) 
+        video_size = os.path.getsize(full_video_path)
+        # converting from bytes to MB
         if video_size < 4194304000:
             video_size = video_size / 1000000
         context = {'video_by_id': video_by_id,

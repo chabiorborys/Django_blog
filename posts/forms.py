@@ -3,11 +3,9 @@ from django.core.exceptions import ValidationError
 from .models import VideoModel
 
 class ContactForm(forms.Form):
-    name = forms.CharField(initial='Your name', required=True)
-    last_name = forms.CharField(initial='Last name', required=True)
-    subject = forms.CharField(max_length=100)
-    message = forms.CharField(widget=forms.Textarea)
-    sender = forms.EmailField(required=True)
+    name = forms.CharField(max_length=500, label="Your name")
+    email = forms.EmailField(max_length=500, label="Your email")
+    comment = forms.CharField(label="", widget=forms.Textarea(attrs={'placeholder':'Enter your message here'}))
 
 class LoginForm(forms.Form):
     username = forms.CharField(label='Your name', max_length=20)

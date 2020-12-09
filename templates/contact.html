@@ -1,14 +1,9 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block content %}
-        <h1>So you do want to contact me...</h1>
-        <p> e-mail: chabiorborys@gmail.com </p>
-        <p> phone number - +48 721 855 584 </p>
-        <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <div class="form-actions">
-                        <button type="submit">Send</button>
-                </div>
-        </form>
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<h1>Contact Form </h1>
+{{ confirmation }}
+<form action="" method="POST">
+    {% csrf_token %} {{ form.as_p }}
+    <input type="submit" value="Submit" />
+</form>
 {% endblock content %}
