@@ -13,6 +13,9 @@ from django.core.mail import send_mail
 
 class LandingPageView(View):
     def get(self, request):
+        username = None
+        if request.user.is_authenticated:
+            username = request.user.username
         context = {}
         return render(request, 'index.html', context)
 
@@ -174,6 +177,11 @@ class PythonPageView(View):
         context = {}
         return render(request, 'python.html', context)
 
+class PythonIteratorsView(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'python_iterators.html', context)
+        
 class SecureShellPageView(View):
     def get(self, request):
         context = {}

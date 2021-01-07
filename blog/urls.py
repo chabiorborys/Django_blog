@@ -17,6 +17,7 @@ urlpatterns = [
     path('github/', views.GithubPageView.as_view()),
     path('digital_ocean/', views.DigitalOceanPageView.as_view()),
     path('python/', views.PythonPageView.as_view()),
+    path('python_iterators', views.PythonIteratorsView.as_view()),
     path('django/', views.DjangoPageView.as_view()),
     path('secure_shell/', views.SecureShellPageView.as_view()),
     path('docker/', views.DockerPageView.as_view()),

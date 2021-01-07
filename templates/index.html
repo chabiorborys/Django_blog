@@ -1,6 +1,8 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
-
+{% extends 'base.html' %} {% load static %} {% block content %} {% if user.is_authenticated %}
+<h1> Hi {{ user.username }}! My goal is to create a website from scratch and take notes of my journey.</h1>
+{% else %}
 <h1>Hi there! My goal is to create a website from scratch and take notes of my journey.</h1>
+{% endif %}
 <img src="https://media.giphy.com/media/11SIBu3s72Co8w/giphy.gif" class="image">
 <div class="container totoro-container">
     dsdadsadda<img id="totoro" src="https://media.giphy.com/media/omHPYZttAVAAw/giphy.gif">
