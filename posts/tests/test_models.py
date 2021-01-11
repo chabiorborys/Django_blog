@@ -7,7 +7,6 @@ class VideoModelTest(TestCase):
     def setUpTestData(cls):
         # Set up non-modified objects used by all test methods
         user = User.objects.create_user(username='test1', email='test@gmail.com', password='123Test123')
-        user.save()
         Video.objects.create(title="Test1",description='test_description1',path='FCJS2BBMGV18.02.2020.png',datetime='2021-01-07 17:53:15', user=user)
 
     def test_title_label(self):
