@@ -46,7 +46,7 @@ class AboutPageViewTest(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'about.html')
 
-class ContactPageView(TestCase):
+class ContactPageViewTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         pass
@@ -58,3 +58,53 @@ class ContactPageView(TestCase):
     def test_view_uses_correct_template(self):
         response = self.client.get('/contact/')
         self.assertTemplateUsed(response, 'contact.html')
+
+class RegisterPageViewTest(TestCase):
+    @classmethod
+    def setUp(self):
+        self.register_url=reverse('register')
+        self.user={
+            'username':'username',
+            'password':'password',
+            're_password':'password',
+            'first_name':'first_name',
+            'last_name':'last_name',
+            'email':'email@gmail.com'
+        }
+      
+    def test_view_url_exists_at_desired_location(self):
+        response = self.client.get('/register/')
+        self.assertEquals(response.status_code, 200)
+
+    def test_view_uses_correct_template(self):
+        response = self.client.get('/register/')
+        self.assertTemplateUsed(response, 'register.html')
+
+    def test_user_can_register(self):
+        response = self.client.post(self.register_url,self.user,format='text/html')
+        self.assertEqual(response.status_code,302)
+
+class LoginPageViewTest(TestCase):
+    @classmethod
+    def setUp(self):
+        self.login_url=reverse('login')
+        self.user={
+            'username':'username',
+            'password':'password',
+            're_password':'password',
+            'first_name':'first_name',
+            'last_name':'last_name',
+            'email':'email@gmail.com'
+        }
+    
+    def test_view_exists_at_desired_loction(self):
+        response = self.client.get(self.login_url)
+        self.assertEqual(response.status_code, 200)
+    
+    def test_view_uses_correct_template(self):
+        response = self.client.get(self.login_url)
+        self.assertTemplateUsed(response, 'login.html')
+
+    def test_user_can_login(self):
+        response = self.client.post(self.login_url,self.user,format='text/html')
+        self.assertEqual(response.status_code,302)
