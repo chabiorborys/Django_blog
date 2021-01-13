@@ -1,6 +1,7 @@
 import os
 from django.shortcuts import render, redirect
 from django.views import View
+from django.contrib import messages
 from django.http import HttpResponse
 from django.core.mail import send_mail
 from .forms import ContactForm, RegisterForm, LoginForm, NewVideoForm, CommentForm, VideoForm
@@ -77,23 +78,50 @@ class RegisterPageView(View):
 
 class LoginPageView(View):
     def get(self, request):
-        if request.user.is_authenticated:
-            return redirect('/')
-        form = LoginForm()
-        return render(request, 'login.html', {'form': form})
-    
+        return render(request, 'login.html')
     def post(self, request):
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                # if user exists, login() function will keep him logged during session
-                login(request, user)
-                return redirect('/') 
-            else:
-                return redirect('/login')
+        context = {
+            'data': request.POST,
+            'has_error': False
+        }
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        if username == '':
+            messages.add_message(request, messages.ERROR,
+                                'Username is required')
+            context['has_error'] = True
+        if password == '':
+            messages.add_message(request, messages.ERROR,
+                                'Password is required')
+            context['has_error'] = True
+        user = authenticate(request, username=username, password=password)
+
+        if not user and not context['has_error']:
+            messages.add_message(request, messages.ERROR, 'Invalid login')
+            context['has_error'] = True
+        
+        if context['has_error']:
+            return render(request, 'login.html', status=401, context=context)
+        login(request, user)
+        return redirect('/')
+    # def get(self, request):
+    #     if request.user.is_authenticated:
+    #         return redirect('/')
+    #     form = LoginForm()
+    #     return render(request, 'login.html', {'form': form})
+    
+    # def post(self, request):
+    #     form = LoginForm(request.POST)
+    #     if form.is_valid():
+    #         username = form.cleaned_data['username']
+    #         password = form.cleaned_data['password']
+    #         user = authenticate(request, username=username, password=password)
+    #         if user is not None:
+    #             # if user exists, login() function will keep him logged during session
+    #             login(request, user)
+    #             return redirect('/') 
+    #         else:
+    #             return redirect('/login')
 
 class LogoutPageView(View):
     def get(self, request):

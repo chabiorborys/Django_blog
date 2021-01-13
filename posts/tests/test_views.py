@@ -88,6 +88,7 @@ class LoginPageViewTest(TestCase):
     @classmethod
     def setUp(self):
         self.login_url=reverse('login')
+        self.register_url=reverse('register')
         self.user={
             'username':'username',
             'password':'password',
@@ -106,5 +107,18 @@ class LoginPageViewTest(TestCase):
         self.assertTemplateUsed(response, 'login.html')
 
     def test_user_can_login(self):
+        self.client.post(self.register_url,self.user,format='text/html')
+        user = User.objects.filter(email=self.user['email']).first()
+        #Activate user, otherwise he won't be able to log in
+        user.is_active = True
+        user.save()
         response = self.client.post(self.login_url,self.user,format='text/html')
         self.assertEqual(response.status_code,302)
+
+    def test_cant_login_with_no_username(self):
+        response = self.client.post(self.login_url,{'username':'','password':'password'},format='text/html')
+        self.assertEqual(response.status_code,401)
+
+    def test_cant_login_with_no_password(self):
+        response = self.client.post(self.login_url,{'username':'username','password':''}, format='text/html')
+        self.assertEqual(response.status_code, 401)
